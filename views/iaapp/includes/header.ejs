@@ -1,0 +1,112 @@
+<div>
+  <div class="alert alert-danger" role="alert" style="margin-bottom: 0;">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>
+      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    </strong>
+    This is BETA version. Your account could be deleted after release.
+  </div>
+
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="<%= webAttrs.webroot%>">
+          InAnalysis
+          <i class="far fa-hand-spock fa-fw" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="<%= webAttrs.webroot%>/dashboard">
+              <i class="fa fa-sitemap fa-fw" aria-hidden="true"></i>
+              Project Management
+            </a>
+          </li>
+          <li>
+            <a href="<%= webAttrs.webroot%>/api-management">
+              <i class="fa fa-map-signs fa-fw" aria-hidden="true"></i>
+              API Management
+            </a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="<%= webAttrs.webroot%>/docs">
+              <i class="fa fa-file-text-o fa-fw" aria-hidden="true"></i>
+              Documentation
+            </a>
+          </li>
+          <li sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">
+              <i class="fa fa-tachometer fa-fw" aria-hidden="true"></i>
+              Administration
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="/admin">
+                  <i class="fa fa-file-text-o fa-fw" aria-hidden="true"></i>
+                  Configuration
+                </a>
+              </li>
+              <li>
+                <a href="/admin/user-management">
+                  <i class="fa fa-users fa-fw" aria-hidden="true"></i>
+                  User Management
+                </a>
+              </li>
+              <li>
+                <a href="/admin/logs">
+                  <i class="fa fa-motorcycle fa-fw" aria-hidden="true"></i>
+                  Log Files
+                </a>
+              </li>
+              <li>
+                <a href="/application/liquibase">
+                  <i class="fa fa-dribbble fa-fw" aria-hidden="true"></i>
+                  Liquibase Information
+                </a>
+              </li>
+              <li>
+                <a href="/h2-console">
+                  <i class="fa fa-database fa-fw" aria-hidden="true"></i>
+                  H2 Console
+                </a>
+              </li>
+              <li>
+                <a href="/swagger-ui.html">
+                  <i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i>
+                  Swagger UI
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li th:inline="text">
+            <a>
+              <i class="fa fa-user fa-fw" aria-hidden="true"></i>
+              <strong>[[${#httpServletRequest.remoteUser}]]</strong>
+            </a>
+          </li>
+          <li>
+            <a th:href="@{/logout}">
+              <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>
+              Sign Out
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+    <!--/.container-fluid -->
+  </nav>
+</div>

@@ -1,0 +1,30 @@
+.form-title{
+  color: #63aef1;
+  font-size: 1.2em;
+  font-weight: 800;
+}
+
+.form-label{
+  font-size: 1.2em;
+  font-weight: 800;
+}
+
+.form-control{
+  background-color: #f2f2f2;
+  border-radius: 8px;
+}
+
+.form-hint{
+  color: #b6b6b6;
+}
+
+@media (min-width: 768px){
+
+  .form-label{
+    padding-top: .2em;
+  }
+
+  .form-hint{
+    padding-top: .3em;
+  }
+}

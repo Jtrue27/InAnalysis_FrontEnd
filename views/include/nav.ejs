@@ -1,0 +1,56 @@
+<nav class="navbar">
+  <a href="/fakeIndex" style="height: 100%;"><img class="nav-logo" src="/assets/imgs/login_logo.png"/></a>
+  <div class="nav-bars nav-open d-md-none" onclick="openNav()">
+    <span>
+      <i class="fas fa-bars"></i>
+    </span>
+  </div>
+
+  <div class="nav-links">
+    <div style="height:50px;" class="d-md-none">
+      <a href="/fakeIndex"><img class="nav-logo" src="/assets/imgs/login_logo.png"/></a>
+    </div>
+
+    <ul>
+      <li>
+        <a href="#" class="nav-links-a">手機導覽</a>
+      </li>
+      <li>
+        <a href="/traveler/find" class="nav-links-a">熱門旅人</a>
+      </li>
+      <li>
+        <a href="/want_guide" class="nav-links-a">想去哪裡玩?</a>
+      </li>
+      <li>
+        <a href="/aboutus" class="nav-links-a">關於我們</a>
+      </li>
+      <li>
+        <a href="/login" class="nav-links-a">開始寫導覽</a>
+      </li>
+      <li>
+        <div class="nav-search-input">
+          <input type="text" placeholder="搜尋導覽"/>
+          <span class="pl-3"><a href="#" class="nav-search-btn"><i class="fas fa-search"></i></a></span>
+        </div>
+      </li>
+    </ul>
+
+    <div class="nav-bars d-md-none" style="color: #fff;" onclick="closeNav()">
+      <span>
+        <i class="fas fa-times"></i>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<script>
+  function openNav(){
+    $('.nav-links').fadeIn();
+    $('.nav-open').fadeOut();
+  }
+
+  function closeNav(){
+    $('.nav-links').hide();
+    $('.nav-open').fadeIn();
+  }
+</script>

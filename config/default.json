@@ -1,0 +1,11 @@
+{
+    "sshKeyPath": "/home/zxaustin/keys/privkey.pem",
+    "sshCertPath": "/home/zxaustin/keys/cert.pem",
+    "sshChainPath": "/home/zxaustin/keys/chain.pem",
+    "sshFullChainPath": "/home/zxaustin/keys/fullchain.pem",
+    "webroot": "http://popworld.writes.com.tw",
+    "webtitle": "Popworld",
+    "mongoUrl": "mongodb://localhost:27017",
+    "mongoDbName": "popworld",
+    "iaappRoot": "/iaapp"
+}

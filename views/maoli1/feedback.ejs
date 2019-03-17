@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html id="top">
+	<head>
+    <% include include/meta %>
+		<% include include/css %>
+		<link rel="stylesheet" href="assets/css/forms.css" />
+		<style>
+
+			.feedbackForm{
+				max-width: 700px;
+    		margin: 0 auto;
+				background-color: #fff;
+			}
+
+			@media (min-width: 768px){
+				.feedbackForm{
+					padding-left: 2em;
+					padding-right: 2em;
+					padding-top: 1em;
+					padding-bottom: 4em;
+					box-shadow: 0px 0px 10px #ddd;
+
+				}
+			}
+		</style>
+  </head>
+	<body>
+		<div id="app">
+			<% include include/nav %>
+			<section class="bg-mountain">
+				<img src="assets/imgs/back_mountain.png" class="bg-mountain-img" />
+				<div class="container pb-5">
+
+					<nav aria-label="breadcrumb">
+					  <ol class="breadcrumb">
+					    <li class="breadcrumb-item"><a href="./" class="breadcrumb-item-link">首頁</a></li>
+					    <li class="breadcrumb-item active">意見回饋</li>
+					  </ol>
+					</nav>
+
+					<h2 class="section-title">意見回饋</h2>
+
+					<div class="feedbackForm">
+						<form>
+							<div class="row">
+
+								<div class="col-12 col-md-2 mt-3">
+									<div class="form-label">
+										信件主旨
+									</div>
+								</div>
+
+								<div class="col-12 col-md-10 mt-3">
+									<input type="text" class="form-control" >
+								</div>
+
+								<div class="col-12 col-md-2 mt-3">
+									<div class="form-label">
+										信件內容
+									</div>
+								</div>
+
+								<div class="col-12 col-md-10 mt-3">
+									<textarea type="text" class="form-control" rows="10"></textarea>
+								</div>
+
+								<div class="col-12 mt-3">
+									<hr/>
+								</div>
+
+								<div class="col-12 col-md-2 mt-3">
+									<div class="form-label">
+										中英姓名
+									</div>
+								</div>
+
+								<div class="col-12 col-md-10 mt-3">
+									<div class="form-row">
+								    <div class="form-group col-md-6">
+								      <input type="text" class="form-control" >
+								    </div>
+								    <div class="form-group col-md-6">
+								      <label class="form-hint">請填寫您的中文或英文姓名</label>
+								    </div>
+								  </div>
+								</div>
+
+								<div class="col-12 col-md-2 mt-3">
+									<div class="form-label">
+										連絡電話
+									</div>
+								</div>
+
+								<div class="col-12 col-md-10 mt-3">
+									<div class="form-row">
+								    <div class="form-group col-md-6">
+								      <input type="text" class="form-control" >
+								    </div>
+								    <div class="form-group col-md-6">
+								      <label class="form-hint">市話請加上區碼</label>
+								    </div>
+								  </div>
+								</div>
+
+								<div class="col-12 col-md-2 mt-3">
+									<div class="form-label">
+										電子信箱
+									</div>
+								</div>
+
+								<div class="col-12 col-md-10 mt-3">
+									<input type="text" class="form-control" >
+									<label class="form-hint">請輸入您的E-Mail，回覆您的意見用</label>
+								</div>
+
+								<div class="col-12 col-md-2 mt-3">
+									<div class="form-label">
+										附加檔案
+									</div>
+								</div>
+
+								<div class="col-12 col-md-10 mt-3">
+									<input type="file" >
+									<label class="form-hint">(允許附件類型為mov、mp3、wav、wmv、jpg、jpeg、3gp、mpeg)</label>
+								</div>
+
+								<div class="col-12 text-center mt-3">
+									<img class="img-fluid" src="assets/imgs/recaptcha.jpg" />
+								</div>
+
+								<div class="col-12 text-center mt-3 px-5">
+									<button class="btn btn-lg btn-primary btn-block">送出</button>
+								</div>
+
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</section>
+			<% include include/footer %>
+		</div>
+	</body>
+</html>
+<% include include/scripts %>
+
+<script>
+  var app = null;
+
+  function initApp(){
+    app = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      watch: {
+
+      },
+      updated: function(){
+
+      },
+      computed: {
+
+      },
+      methods: {
+
+      }
+    });
+  }
+
+  $(document).ready(function(){
+		setNavActive('nav_feedback');
+		initApp();
+  });
+</script>

@@ -1,0 +1,1059 @@
+<!DOCTYPE HTML>
+<html id="top">
+	<head>
+    <title>Popworld</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<% include include/css %>
+    <link rel="stylesheet" href="/assets/css/pop_main.css" />
+
+		<link rel="icon"
+      type="image/png"
+      href="/assets/imgs/web_title_icon.png">
+		<meta property="og:title" content="Popworld蹦世界"></meta>
+		<meta property="og:type" content="website"></meta>
+		<meta property="og:description" content="自助旅行，背包客，省錢必備手機導遊!"></meta>
+		<meta property="og:image" content="/assets/imgs/icon.jpg"></meta>
+
+    <script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-55647.js"></script>
+  </head>
+	<body>
+		<div id="app">
+
+
+
+			<section class="banner">
+
+	      <div class="banner-main">
+					<img class="banner-logo" src="./assets/imgs/login_logo.png"/>
+	        <div class="banner-title">
+	          <h2>蹦世界</h2>
+	          <small>手機導遊</small>
+	        </div>
+					<!--
+	        <div class="banner-search-input">
+	          <input type="text" placeholder="想去哪兒玩呢?"/>
+	          <span class="pl-3"><a href="#" class="banner-search-btn"><i class="fas fa-search"></i></a></span>
+	        </div>
+					-->
+	      </div>
+				<!-- <video src="/assets/video/mov.mp4" loop="" playsinline="" muted="" autoplay=""></video> -->
+				<div class="banner-bg">
+					<img id="bg1" src="./assets/imgs/banner_bg.jpg" />
+					<img id="bg2" src="./assets/imgs/banner_bg2.jpg" />
+					<img id="bg3" src="./assets/imgs/banner_bg3.jpg" />
+					<img id="bg4" src="./assets/imgs/banner_bg4.jpg" />
+				</div>
+	    </section>
+
+			<!--
+	    <section class="banner">
+	      <div class="banner-main">
+	        <img class="banner-logo" src="./assets/imgs/login_logo.png"/>
+	        <div class="banner-title">
+	          <h2>蹦世界</h2>
+	          <small>手機導遊</small>
+	        </div>
+	        <div class="banner-search-input">
+	          <input type="text" placeholder="想去哪兒玩呢?"/>
+	          <span class="pl-3"><a href="#" class="banner-search-btn"><i class="fas fa-search"></i></a></span>
+	        </div>
+	      </div>
+	    </section>
+			-->
+
+			<div>
+				<nav class="sticky-nav sticky-bg">
+				</nav>
+				<nav class="sticky-nav">
+					<a href="/fakeIndex" style="height: 100%;"><img class="nav-logo" src="./assets/imgs/login_logo.png"/></a>
+					<div class="nav-bars nav-open d-md-none" onclick="openNav()">
+						<span>
+							<i class="fas fa-bars"></i>
+						</span>
+					</div>
+
+					<div class="nav-links">
+						<div style="height:50px;" class="d-md-none">
+							<a href="/fakeIndex"><img class="nav-logo" src="./assets/imgs/login_logo.png"/></a>
+						</div>
+
+						<ul>
+							<li>
+								<a href="#" class="nav-links-a">手機導覽</a>
+							</li>
+							<li>
+								<a href="/traveler/find" class="nav-links-a">熱門旅人</a>
+							</li>
+							<li>
+								<a href="/want_guide" class="nav-links-a">想去哪裡玩?</a>
+							</li>
+							<li>
+								<a href="/aboutus" class="nav-links-a">關於我們</a>
+							</li>
+							<li>
+								<a href="#" class="nav-links-a">開始寫導覽</a>
+							</li>
+							<li>
+								<div class="nav-search-input">
+				          <input type="text" placeholder="搜尋導覽"/>
+				          <span class="pl-3"><a href="#" class="nav-search-btn"><i class="fas fa-search"></i></a></span>
+				        </div>
+							</li>
+						</ul>
+
+						<div class="nav-bars d-md-none" style="color: #fff;" onclick="closeNav()">
+							<span>
+								<i class="fas fa-times"></i>
+							</span>
+						</div>
+					</div>
+				</nav>
+
+
+				<section class="download">
+		      <div class="download-content container">
+		        <div class="download-setumei-div">
+		          <h4 class="download-slogan">手機就是你的最佳導遊</h4>
+		          <div class="download-desc">
+		            現在就下載蹦世界，把全世界的導覽都裝進手機！
+		          </div>
+		        </div>
+		        <div class="download-srcs-div">
+		          <ul class="download-src-list">
+								<a href="https://play.google.com/store/apps/details?id=com.popworld" target="_blank">
+		              <i class="fab fa-google-play fa-2x"></i>
+		              <div class="px-2">Google Play</div>
+		            </a>
+								<a href="https://itunes.apple.com/tw/app/beng-shi-jie/id1042944777?l=zh&ls=1&mt=8" target="_blank">
+									<i class="fab fa-app-store-ios fa-2x"></i>
+		              <div class="px-2">App Store</div>
+		            </a>
+		          </ul>
+		        </div>
+		      </div>
+		    </section>
+
+
+				<section class="guides">
+
+		      <div class="container">
+						<div class="guides-title"><i class="fas fa-map-marker-alt"></i> 熱門導覽</div>
+		        <div class="row">
+
+		          <div class="col-md-4">
+		            <a class="guides-div">
+									<img class="guides-img" src="./assets/imgs/fake_guide_small.jpg"/>
+		              <div class="guide-desc">
+		                <div>
+		                  <span>醫療史料館</span>
+		                  <p>
+		                    十九世紀下半葉，在打狗登陸的歐美醫療傳教人員及海關醫員建立西式醫院、提供醫療服務，高雄師...
+		                  </p>
+											<small>導覽內容→</small>
+		                </div>
+		              </div>
+		            </a>
+		    			</div>
+
+		          <div class="col-md-4">
+		            <a class="guides-div">
+									<img class="guides-img" src="./assets/imgs/fake_guide_small.jpg"/>
+		              <div class="guide-desc">
+		                <div>
+		                  <span>醫療史料館</span>
+		                  <p>
+		                    十九世紀下半葉，在打狗登陸的歐美醫療傳教人員及海關醫員建立西式醫院、提供醫療服務，高雄師...
+		                  </p>
+											<small>導覽內容→</small>
+		                </div>
+		              </div>
+		            </a>
+		    			</div>
+
+		          <div class="col-md-4">
+		            <a class="guides-div">
+									<img class="guides-img" src="./assets/imgs/fake_guide_small.jpg"/>
+		              <div class="guide-desc">
+		                <div>
+		                  <span>醫療史料館</span>
+		                  <p>
+		                    十九世紀下半葉，在打狗登陸的歐美醫療傳教人員及海關醫員建立西式醫院、提供醫療服務，高雄師...
+		                  </p>
+											<small>導覽內容→</small>
+		                </div>
+		              </div>
+		            </a>
+		    			</div>
+
+							<div class="col-12 text-right">
+								<a href="#" class="guides-more-btn">更多導覽</a>
+							</div>
+		        </div>
+		      </div>
+		    </section>
+
+
+
+				<section class="special">
+					<div class="container">
+						<div class="special-title">名人故居實境解謎</div>
+						<div class="row">
+
+							<!--
+							<div class="col-12 col-md-6 special-video-div">
+								<a href="https://youtu.be/I2eFOOnuxpE" class="special-video-link">
+									<img src="./assets/imgs/event.png" />
+									<span class="play-btn"><i class="fab fa-youtube fa-3x"></i></span>
+								</a>
+							</div>
+							-->
+
+							<div class="col-12 col-md-6 special-video-div">
+
+								<div class="special-video">
+									<iframe src="https://www.youtube.com/embed/I2eFOOnuxpE?rel=0&showinfo=0" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+								</div>
+							</div>
+
+							<div class="col-12 col-md-6">
+								<div class="special-desc">
+									<div class="special-content">
+										<div class="special-content-icon">
+											<span class="special-content-icon-spin">
+												<i class="fas fa-question"></i>
+											</span>
+										</div>
+										<p>
+											蹦世界與孫運璿、梁實秋故居合作推出最新實境解謎遊戲，結合手機APP、實體道具與AR擴增實境技術，帶你經歷一場腦力的風暴！
+										</p>
+										<p>
+											就讓我們一起預約前往 <span class="special-color">知名作家梁實秋</span> 與 <span class="special-color">永遠的行政院長孫運璿</span> 的家，當一回福爾摩斯吧！
+										</p>
+										<a href="https://popworld.cc/event/puzzle_activity" target="_blank" class="special-btn">詳細內容</a>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<img src="./assets/imgs/event3_sm.jpg" class="moving-img moving-ani1"/>
+					<img src="./assets/imgs/event3_sm.jpg" class="moving-img moving-ani2"/>
+				</section>
+
+				<section class="intro">
+
+					<div class="d-none d-md-block">
+						<div class="left-block">
+							<div class="left-intro">
+
+								<div class="left-intro-div" id="leftIntro0" style="transform: scale(1, 1); opacity: 1;">
+									<div class="left-intro-innerContent">
+										<div class="left-intro-title">戶外導覽</div>
+										<div class="left-intro-desc">利用手機定位，走到景點自動蹦出介紹聲音、文字、圖片，輕鬆了解當地文化特色。</div>
+									</div>
+								</div>
+
+								<div class="left-intro-div" id="leftIntro1" style="transform: scale(0.5, 0.5); opacity: 0;">
+									<div class="left-intro-innerContent">
+										<div class="left-intro-title">室內定位</div>
+										<div class="left-intro-desc">可多國語言，靠近即自動介紹，無須導覽機，節省成本。展覽活動中可提供民眾路線導引、廠商資訊與優惠訊息推播。</div>
+									</div>
+								</div>
+
+								<div class="left-intro-div" id="leftIntro2" style="transform: scale(0.5, 0.5); opacity: 0;">
+									<div class="left-intro-innerContent">
+										<div class="left-intro-title">雲端後台</div>
+										<div class="left-intro-desc">網頁簡易操作，利用雲端技術，能夠即時更新內容，特展與常設展皆合適。</div>
+									</div>
+								</div>
+
+								<div class="left-intro-div" id="leftIntro3" style="transform: scale(0.5, 0.5); opacity: 0;">
+									<div class="left-intro-innerContent">
+										<div class="left-intro-title">行動支付</div>
+										<div class="left-intro-desc">符合政府無紙化政策，解決票卷列印問題、減少票卷成本，降低收款、驗票人力成本，增加館內收入。</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<div class="right-block">
+							<div class="right-block-inner">
+								<div class="right-block-content">
+									<div class="intro-block intro-block-sm intro-bg" style="left:0%; top:0%;"></div>
+									<div class="intro-block intro-block-sm intro-bg" style="left:20%; top:0%;"></div>
+									<div class="intro-block intro-block-sm intro-bg" style="left:40%; top:0%;"></div>
+									<div class="intro-block intro-block-sm intro-bg" style="left:60%; top:0%;"></div>
+									<div class="intro-block intro-block-sm intro-bg" style="left:80%; top:0%;"></div>
+
+									<div class="intro-block intro-block-sm" style="left:0%; top:20%;cursor:pointer;" v-bind:class="{'active-info': selecting_info == 0}" v-on:mouseover="changeIntro(0)" v-on:click="changeIntro(0)">
+										<div class="intro-block-sides intro-block-side1">
+											<div>
+												<i class="fas fa-bicycle fa-2x"></i>
+											</div>
+										</div>
+										<div class="intro-block-sides intro-block-side2">
+											<div>
+												戶外導覽
+											</div>
+										</div>
+									</div>
+									<div class="intro-block intro-block-sm" style="left:0%; top:40%;cursor:pointer;" v-bind:class="{'active-info': selecting_info == 1}" v-on:mouseover="changeIntro(1)" v-on:click="changeIntro(1)">
+										<div class="intro-block-sides intro-block-side1">
+											<div>
+												<i class="fas fa-home fa-2x"></i>
+											</div>
+										</div>
+										<div class="intro-block-sides intro-block-side2">
+											<div>
+												室內定位
+											</div>
+										</div>
+									</div>
+
+									<div class="intro-block intro-block-lg intro-bg" style="left:20%; top:20%;">
+										<div class="intro-block-title">服務特色</div>
+									</div>
+
+									<div class="intro-block intro-block-sm" style="left:0%; top:60%;cursor:pointer;" v-bind:class="{'active-info': selecting_info == 2}" v-on:mouseover="changeIntro(2)" v-on:click="changeIntro(2)">
+										<div class="intro-block-sides intro-block-side1">
+											<div>
+												<i class="fas fa-cloud fa-2x"></i>
+											</div>
+										</div>
+										<div class="intro-block-sides intro-block-side2">
+											<div>
+												雲端後台
+											</div>
+										</div>
+									</div>
+									<div class="intro-block intro-block-sm" style="left:20%; top:60%;cursor:pointer;" v-bind:class="{'active-info': selecting_info == 3}" v-on:mouseover="changeIntro(3)" v-on:click="changeIntro(3)">
+										<div class="intro-block-sides intro-block-side1">
+											<div>
+												<i class="fas fa-donate fa-2x"></i>
+											</div>
+										</div>
+										<div class="intro-block-sides intro-block-side2">
+											<div>
+												行動支付
+											</div>
+										</div>
+									</div>
+									<div class="intro-block intro-block-sm intro-bg" style="left:40%; top:60%;"></div>
+									<div class="intro-block intro-block-sm intro-bg" style="left:60%; top:60%;"></div>
+									<div class="intro-block intro-block-sm intro-bg" style="left:80%; top:60%;"></div>
+
+									<div class="intro-block intro-block-sm intro-bg" style="left:40%; top:80%;"></div>
+									<div class="intro-block intro-block-sm intro-bg" style="left:60%; top:80%;"></div>
+									<div class="intro-block intro-block-sm intro-bg" style="left:80%; top:80%;"></div>
+
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="container d-md-none">
+						<div class="intro-title">服務特色</div>
+
+						<div class="row">
+
+							<div class="col-12 col-md-6 col-lg-3">
+								<div class="intro-card">
+									<div class="intro-card-icon">
+										<i class="fas fa-bicycle fa-2x"></i>
+									</div>
+									<div class="intro-card-desc">
+										<div class="intro-card-title">戶外導覽</div>
+										<div class="intro-card-content">利用手機定位，走到景點自動蹦出介紹聲音、文字、圖片，輕鬆了解當地文化特色。</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-12 col-md-6 col-lg-3">
+								<div class="intro-card">
+									<div class="intro-card-icon">
+										<i class="fas fa-home fa-2x"></i>
+									</div>
+									<div class="intro-card-desc">
+										<div class="intro-card-title">室內定位</div>
+										<div class="intro-card-content">可多國語言，靠近即自動介紹，無須導覽機，節省成本。展覽活動中可提供民眾路線導引、廠商資訊與優惠訊息推播。</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-12 col-md-6 col-lg-3">
+								<div class="intro-card">
+									<div class="intro-card-icon">
+										<i class="fas fa-cloud fa-2x"></i>
+									</div>
+									<div class="intro-card-desc">
+										<div class="intro-card-title">雲端後台</div>
+										<div class="intro-card-content">網頁簡易操作，利用雲端技術，能夠即時更新內容，特展與常設展皆合適。</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-12 col-md-6 col-lg-3">
+								<div class="intro-card">
+									<div class="intro-card-icon">
+										<i class="fas fa-donate fa-2x"></i>
+									</div>
+									<div class="intro-card-desc">
+										<div class="intro-card-title">行動支付</div>
+										<div class="intro-card-content">符合政府無紙化政策，解決票卷列印問題、減少票卷成本，降低收款、驗票人力成本，增加館內收入。</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<!--
+						<div class="testRow">
+							<div class="testDiv1">
+								<div class="ani-border">
+
+								</div>
+
+								<div class="testDiv1-content">
+
+									<div class="testDiv1-container">
+
+										<div class="testDiv1-inner" v-bind:class="{'active-info': selecting_info == 0}">
+											<div class="testDiv1-innerContent">
+												<div class="testDiv1-title">戶外導覽</div>
+												<div class="testDiv1-desc">利用手機定位，走到景點自動蹦出介紹聲音、文字、圖片，輕鬆了解當地文化特色。</div>
+											</div>
+										</div>
+
+										<div class="testDiv1-inner" v-bind:class="{'active-info': selecting_info == 1}">
+											<div class="testDiv1-innerContent">
+												<div class="testDiv1-title">室內定位</div>
+												<div class="testDiv1-desc">可多國語言，靠近即自動介紹，無須導覽機，節省成本。展覽活動中可提供民眾路線導引、廠商資訊與優惠訊息推播。</div>
+											</div>
+										</div>
+
+										<div class="testDiv1-inner" v-bind:class="{'active-info': selecting_info == 2}">
+											<div class="testDiv1-innerContent">
+												<div class="testDiv1-title">雲端後台</div>
+												<div class="testDiv1-desc">網頁簡易操作，利用雲端技術，能夠即時更新內容，特展與常設展皆合適。</div>
+											</div>
+										</div>
+
+										<div class="testDiv1-inner" v-bind:class="{'active-info': selecting_info == 3}">
+											<div class="testDiv1-innerContent">
+												<div class="testDiv1-title">行動支付</div>
+												<div class="testDiv1-desc">符合政府無紙化政策，解決票卷列印問題、減少票卷成本，降低收款、驗票人力成本，增加館內收入。</div>
+											</div>
+										</div>
+
+
+									</div>
+
+
+									<div class="testDiv1-bottom-nav">
+										<span v-bind:class="{'active': selecting_info == 0}" v-on:click="selecting_info = 0;">◆</span>
+										<span v-bind:class="{'active': selecting_info == 1}" v-on:click="selecting_info = 1;">◆</span>
+										<span v-bind:class="{'active': selecting_info == 2}" v-on:click="selecting_info = 2;">◆</span>
+										<span v-bind:class="{'active': selecting_info == 3}" v-on:click="selecting_info = 3;">◆</span>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="testDiv2">
+								<div class="testDiv2-inner">
+
+									<div class="testContent testUp" v-bind:class="{'active-info': selecting_info == 0}" v-on:mouseover="selecting_info = 0;">
+										<div class="side1">
+											<i class="fas fa-bicycle fa-2x"></i>
+										</div>
+										<div class="side2">
+											戶外導覽
+										</div>
+									</div>
+
+									<div class="testContent testLeft" v-bind:class="{'active-info': selecting_info == 1}" v-on:mouseover="selecting_info = 1;">
+										<div class="side1">
+											<i class="fas fa-home fa-2x"></i>
+										</div>
+										<div class="side2">
+											室內定位
+										</div>
+									</div>
+
+									<div class="testContent testRight" v-bind:class="{'active-info': selecting_info == 2}" v-on:mouseover="selecting_info = 2;">
+										<div class="side1">
+											<i class="fas fa-cloud fa-2x"></i>
+										</div>
+										<div class="side2">
+											雲端後台
+										</div>
+									</div>
+
+									<div class="testContent testDown" v-bind:class="{'active-info': selecting_info == 3}" v-on:mouseover="selecting_info = 3;">
+										<div class="side1">
+											<i class="fas fa-donate fa-2x"></i>
+										</div>
+										<div class="side2">
+											行動支付
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						-->
+					</div>
+
+				</section>
+
+
+
+
+				<section class="achievement">
+					<h1 class="text-center mb-4" style="text-shadow: 0px 0px 5px #fff;">公司成果</h1>
+					<div class="achievement-div">
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach1.jpg"/>
+								<span>孫運璿科技．人文紀念館—經濟歡樂送</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach2.jpg"/>
+								<span>梁實秋故居—被鎖的手稿</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach3.jpg"/>
+								<span>中華民國對外貿易發展協會</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach4.jpg"/>
+								<span>花蓮玩秀林</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach5.jpg"/>
+								<span>卯澳漁村社區</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach6.jpg"/>
+								<span>福壽山農場</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach7.jpg"/>
+								<span>發現臺灣─重訪臺灣博物學與博物學家的年代</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach8.jpg"/>
+								<span>2017台北國際旅展</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach9.jpg"/>
+								<span>中央氣象局</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach10.jpg"/>
+								<span>胡適紀念館</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach11.jpg"/>
+								<span>2017未來大人物 「待」溝嘉年華</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach12.jpg"/>
+								<span>綠色之夢—當代臺灣自然書寫特展(國立臺灣文學館)</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach13.jpg"/>
+								<span>描繪美國：美國文學行旅特展(國立臺灣文學館)</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach14.jpg"/>
+								<span>郵政博物館</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach15.jpg"/>
+								<span>國立科學工藝博物館</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach16.jpg"/>
+								<span>蘭嶼地區旅遊資訊</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach17.jpg"/>
+								<span>新北市立黃金博物館</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach18.jpg"/>
+								<span>第15屆桃源創作獎</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach19.jpg"/>
+								<span>陳澄波戶外美術館</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach20.jpg"/>
+								<span>哈佛健康事業</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach21.jpg"/>
+								<span>新北市立十三行博物館</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach22.jpg"/>
+								<span>深溝自來水園區現代館</span>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach23.jpg"/>
+								<span>虎頭山環境教育園區</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach24.jpg"/>
+								<span>台北偶戲館</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach25.jpg"/>
+								<span>【故居探訪-走入名人生活日常】3館合1電子套票</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach26.jpg"/>
+								<span>2016台北國際旅展 - 牽手去旅行（已結束）</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach27.jpg"/>
+								<span>藍晒圖文創園區</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach28.jpg"/>
+								<span>淡水古蹟博物館</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach29.jpg"/>
+								<span>2016 台灣美食展 - 純真食代</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach30.jpg"/>
+								<span>貓空趣漫遊</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach31.jpg"/>
+								<span>2016TTE 夏季最大旅展 台北國際觀光博覽會</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach32.jpg"/>
+								<span>國立臺灣文學館 純真童心——兒童文學資深作家與作品展</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach33.jpg"/>
+								<span>原住民文化園區</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach34.jpg"/>
+								<span>國立臺灣博物館</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach35.jpg"/>
+								<span>鶯歌陶瓷博物館</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach36.jpg"/>
+								<span>高醫校史暨南臺灣醫療史料館</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach37.jpg"/>
+								<span>2016台北寵物用品博覽會</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach38.jpg"/>
+								<span>松山車站集章換紅豆餅</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach39.jpg"/>
+								<span>宜蘭深溝水源生態園區</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach40.jpg"/>
+								<span>2015 ITF 台北國際旅展</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach41.jpg"/>
+								<span>浙江省蔣氏故居智慧導覽</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach42.jpg"/>
+								<span>婚禮AR合照</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach43.jpg"/>
+								<span>蹦遊華山</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+						<div class="achievement-unit">
+							<div class="achievement-unit-content">
+								<img src="./assets/imgs/ach44.jpg"/>
+								<span>魔政大冒險</span>
+								<div class="achievement-unit-bottom"></div>
+							</div>
+						</div>
+
+					</div>
+				</section>
+
+			</div>
+
+			<% include include/footer %>
+		</div>
+	</body>
+</html>
+<% include include/scripts %>
+
+<script>
+  var app = null;
+
+  function initApp(){
+    app = new Vue({
+      el: '#app',
+      data: {
+				selecting_info: 0,
+				nav_open: false,
+				intro_in_animating: false,
+				intro_out_animating: false,
+      },
+      watch: {
+
+      },
+      updated: function(){
+
+      },
+      computed: {
+				intro_animating: function(){
+					return this.intro_in_animating || this.intro_out_animating;
+				},
+      },
+      methods: {
+				changeIntro: function(introNumber){
+					if(!this.intro_animating){
+						if(introNumber != this.selecting_info){
+							const _this = this;
+							_this.intro_in_animating = true;
+							_this.intro_out_animating = true;
+							const closeID = '#leftIntro'+_this.selecting_info;
+							$(closeID).animate({
+								opacity: 0,
+							}, 300, "swing", function(){
+								_this.intro_out_animating = false;
+							});
+							$('#leftIntro'+introNumber).css({scale:0.5,opacity:0});
+							$('#leftIntro'+introNumber).animate({scale:1,opacity:1}, 500, "easeOutBack", function(){
+								_this.intro_in_animating = false;
+							});
+							_this.selecting_info = introNumber;
+						}
+					}
+				},
+      }
+    });
+  }
+
+	function openNav(){
+		$('.nav-links').fadeIn();
+		$('.nav-open').fadeOut();
+	}
+
+	function closeNav(){
+		$('.nav-links').hide();
+		$('.nav-open').fadeIn();
+	}
+
+	var bgid = 1;
+
+	function bannerBgInit(){
+		$('.banner-bg img').css('display', 'none').css('z-index', -5);
+		bgid = 1;
+		startZoomIn();
+	}
+
+	function startZoomIn(){
+		var targetBg = $('#bg'+bgid);
+		targetBg.css('display', 'block').css('z-index', -2);
+		targetBg.animate({ scale: 1.1}, 10000, 'linear', bgFadeOut);
+	}
+
+	function bgFadeOut(){
+		var targetBg = $('#bg'+bgid);
+		targetBg.css('z-index', -1);
+		targetBg.animate({ scale: 1.12, opacity: 0}, 2000, 'linear', function(){bgBack(targetBg);});
+
+		if($('#bg'+(bgid+1)).length > 0){
+			bgid += 1;
+		}else {
+			bgid = 1;
+		}
+		startZoomIn();
+	}
+
+	function bgBack(ele){
+		ele.css('display', 'none').css('z-index', -5).css('scale', 1).css('opacity', 1);
+	}
+
+
+	function scrollListener(event){
+		var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+		//console.log(window.innerWidth);
+		if(window.innerWidth >= 768){
+
+		}else{
+			const h = window.innerHeight;
+			$('.achievement-unit').each(function(){
+				let t = this.offsetTop;
+				if( st<t && (st+h) > t){
+					const sep = Math.abs(t - (st + (h/2))) / (h/2) * 100;
+					const bottom_opac = sep / 100;
+					const opac = Math.max(100 - sep, 20);
+					const span_opac = opac / 100;
+					$(this).find('img').css('opacity', span_opac);
+					$(this).find('span').css('opacity', span_opac);
+					$(this).find('.achievement-unit-content').css('box-shadow', '5px 5px 7px rgb(111, 90, 62, '+span_opac+')');
+					$(this).find('.achievement-unit-bottom').css('opacity', bottom_opac);
+				}else{
+					$(this).find('img').css('opacity', 0.2);
+					$(this).find('span').css('opacity', 0.2);
+				}
+				//console.log(this);
+			});
+		}
+	}
+
+	function initScrollex(){
+		$('.guides-div').scrollex({
+			enter: function() {
+				// Set #foobar's background color to green when we scroll into it.
+				$(this).animate({
+					top: 0,
+					opacity: 1,
+				}, 700);
+				//$(this).css('animation', 'floatUp .7s ease');
+				//$(this).css('background-color', 'green');
+			},
+			leave: function() {
+				// Reset #foobar's background color when we scroll out of it.
+			}
+		});
+		if(window.innerWidth >= 768){
+			$('.achievement-unit-content>img').scrollex({
+				enter: function() {
+					// Set #foobar's background color to green when we scroll into it.
+					$(this).css('filter', 'brightness(100%)');
+					//$(this).css('animation', 'floatUp .7s ease');
+					//$(this).css('background-color', 'green');
+				},
+				leave: function() {
+					// Reset #foobar's background color when we scroll out of it.
+				}
+			});
+		}
+	}
+
+  $(document).ready(function(){
+		initApp();
+		// let windowHeight = window.innerHeight;
+		// $('.banner').css('height', windowHeight+'px');
+
+		$('.achievement-unit-content').each(function(index){
+			const c = parseInt(Math.random() * 5) + 1;
+			const c2 = parseInt(Math.random() * 7) + 1;
+			$(this).addClass('stick-color'+c);
+			$(this).addClass('stick-deg'+c2);
+		});
+
+		if(window.innerWidth >= 768){
+			$('.stick-deg1, .stick-deg3').each(function(){
+				const de = parseInt(Math.random() * 16) + 1;
+				$(this).css('animation', 'yure1 16s ease-in-out '+de+'s infinite');
+			});
+			$('.stick-deg2').each(function(){
+				const de = parseInt(Math.random() * 35) + 1;
+				$(this).css('animation', 'yure2 35s ease-in-out '+de+'s infinite');
+			});
+		}
+
+
+		window.addEventListener("scroll", scrollListener);
+		initScrollex();
+
+		bannerBgInit();
+  });
+</script>

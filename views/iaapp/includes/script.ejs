@@ -1,0 +1,43 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.scrollex/0.2.1/jquery.scrollex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw" crossorigin="anonymous"></script>
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script >
+  /*<![CDATA[*/
+
+  /* active sidebar item */
+  var sidebarActiveId = /*[[${sidebarActiveId}]]*/null;
+  if (sidebarActiveId != null) {
+    $(document).ready(function() {
+      $("#" + sidebarActiveId).addClass("list-group-item-info");
+    });
+  }
+
+  function showLoading(){
+    $("body").append(loadingIconDiv);
+  }
+
+  function hideLoading(){
+    loadingIconDiv.remove();
+  }
+  /* show loading icon */
+  var loadingIconDiv = $('<div id="loader-wrapper"><div id="loader"></div><div id="word">InAnalysis</div></div>');
+  $(document).ready(function() {
+    $("head").append('<link href="<%= webAttrs.webroot%>/assets/css/loadingIcon.css" rel="stylesheet" />');
+    $(".showLoadingIcon").click(function(){
+      showLoading();
+    });
+  });
+
+  /* show tooltip */
+  $(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  /*]]>*/
+</script>

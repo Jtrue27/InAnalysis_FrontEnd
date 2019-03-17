@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html id="top">
+	<head>
+    <title>Popworld</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<% include include/css %>
+    <link rel="stylesheet" href="/assets/css/pop_traveler_find.css" />
+
+		<link rel="icon"
+      type="image/png"
+      href="/assets/imgs/web_title_icon.png">
+		<meta property="og:title" content="Popworld蹦世界"></meta>
+		<meta property="og:type" content="website"></meta>
+		<meta property="og:description" content="自助旅行，背包客，省錢必備手機導遊!"></meta>
+		<meta property="og:image" content="/assets/imgs/icon.jpg"></meta>
+
+  </head>
+	<body>
+		<div id="app">
+      <% include include/nav %>
+      <div class="main-body">
+        <section class="traveler-banner">
+          <div>
+            <h1>熱門旅人</h1>
+          </div>
+        </section>
+
+        <section>
+
+          <div class="container">
+            <div class="row">
+
+              <div class="col-6 col-md-4 col-lg-3" v-for="(item, index) in travelers">
+                <div class="traveler-unit">
+                  <div class="traveler-img-outer">
+                    <div class="traveler-img-inner">
+                      <div class="traveler-img-div">
+                        <img class="traveler-img" v-bind:src="item.imgurl" />
+                      </div>
+                      <div class="traveler-name" v-text="item.name">
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+
+			<% include include/footer %>
+		</div>
+	</body>
+</html>
+<% include include/scripts %>
+
+<script>
+  var app = null;
+
+  function initApp(){
+    app = new Vue({
+      el: '#app',
+      data: {
+        travelers: [
+          {
+            id: 1234,
+            name: '蹦皮',
+            imgurl: 'https://s3-ap-northeast-1.amazonaws.com/popworld-tourguide-storage2/user/305/user_305.jpg?1450196207',
+          },{
+            id: 1234,
+            name: 'test',
+            imgurl: 'https://s3-ap-northeast-1.amazonaws.com/popworld-tourguide-storage2/user/4521/user_4521.jpg?1457683175',
+          },{
+            id: 1234,
+            name: '蹦皮',
+            imgurl: 'https://s3-ap-northeast-1.amazonaws.com/popworld-tourguide-storage2/user/305/user_305.jpg?1450196207',
+          },{
+            id: 1234,
+            name: '蹦皮',
+            imgurl: 'https://s3-ap-northeast-1.amazonaws.com/popworld-tourguide-storage2/user/305/user_305.jpg?1450196207',
+          },{
+            id: 1234,
+            name: '蹦皮',
+            imgurl: 'https://s3-ap-northeast-1.amazonaws.com/popworld-tourguide-storage2/user/305/user_305.jpg?1450196207',
+          },
+        ],
+      },
+      watch: {
+
+      },
+      updated: function(){
+
+      },
+      computed: {
+
+      },
+      methods: {
+
+      }
+    });
+  }
+
+
+
+  $(document).ready(function(){
+		initApp();
+
+  });
+</script>

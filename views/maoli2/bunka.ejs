@@ -1,0 +1,630 @@
+<!DOCTYPE HTML>
+<html id="top">
+	<head>
+		<% include include/meta %>
+		<% include include/css %>
+		<link rel="stylesheet" href="assets/css/culture.css" />
+		<link rel="stylesheet" href="assets/css/jquery.fancybox.min.css" />
+  </head>
+	<body>
+		<div id="app">
+			<% include include/nav %>
+
+				<section class="page-banner">
+					<img class="page-banner-bg" src="./assets/imgs/banner-pic-bunka.jpg" />
+					<h2 class="page-banner-title">鐵道文化</h2>
+				</section>
+
+				<section>
+					<div class="container py-4">
+
+						<nav aria-label="breadcrumb">
+						  <ol class="breadcrumb">
+						    <li class="breadcrumb-item"><a href="./">首頁</a></li>
+						    <li class="breadcrumb-item"><a href="./bunka">鐵道文化</a></li>
+								<li class="breadcrumb-item">內頁</li>
+						  </ol>
+						</nav>
+
+						<div class="main-content">
+
+							<div class="culture-row">
+
+								<div class="culture-left">
+									<div class="d-lg-none mb-4">
+										<select class="form-control" v-model="selectingId">
+								      <option v-for="(item, index) in allSpots" :value="item.id" v-text="item.title"></option>
+								    </select>
+									</div>
+
+									<div class="culture-desc" v-if="selectingItem != null">
+										<h3 v-text="selectingItem.title"></h3>
+										<div class="culture-desc-imgs">
+											<div>
+												<div class="culture-main-img-div">
+													<div class="culture-main-img">
+														<img :src="selectingItem.imgs[showingImg]" />
+													</div>
+												</div>
+											</div>
+											<div class="row mt-4 d-none">
+
+												<div class="col" v-for="(img, index) in selectingItem.imgs" v-if="(selectingItem.imgs.length < 6) || (index < 4)">
+													<div class="desc-img-outer" :class="{'showed': showingImg == index}" @click="showingImg = index">
+														<div class="desc-img-inner">
+															<img :src="img"/>
+														</div>
+													</div>
+												</div>
+
+												<div class="col" v-if="(selectingItem.imgs.length > 5)">
+													<div class="desc-img-outer more" @click="selectingMorePhoto">
+														<div class="desc-img-inner">
+															<img :src="selectingItem.imgs[4]"/>
+
+														</div>
+														<span class="more-count" v-text="selectingItem.imgs.length"></span>
+													</div>
+												</div>
+
+											</div>
+
+											<div class="row mt-4">
+												<div class="col-2">
+													<div class="page-btn" @click="prevPage">
+														<i class="fas fa-angle-left fa-2x"></i>
+													</div>
+												</div>
+												<div class="col-8">
+													<div class="img-pages-div">
+														<div class="img-pages" :style="{width: 100 * selectingItemImgPageAmount + '%', transform: 'translate(-'+((showingImgPage-1) *100 / selectingItemImgPageAmount)+'%, 0)'}">
+															<div class="img-page" :style="{width: 100 / selectingItemImgPageAmount + '%'}" v-for="n in selectingItemImgPageAmount">
+
+																<div class="img-page-imgs" v-if="selectingItem.imgs[4*(n-1) + 0] != undefined">
+																	<div class="desc-img-outer" :class="{'showed': showingImg == 4*(n-1) + 0}" @click="showingImg = 4*(n-1) + 0">
+																		<div class="desc-img-inner">
+																			<img :src="selectingItem.imgs[4*(n-1) + 0]"/>
+																		</div>
+																	</div>
+																</div>
+																<div class="img-page-imgs" v-if="selectingItem.imgs[4*(n-1) + 1] != undefined">
+																	<div class="desc-img-outer" :class="{'showed': showingImg == 4*(n-1) + 1}" @click="showingImg = 4*(n-1) + 1">
+																		<div class="desc-img-inner">
+																			<img :src="selectingItem.imgs[4*(n-1) + 1]"/>
+																		</div>
+																	</div>
+																</div>
+																<div class="img-page-imgs" v-if="selectingItem.imgs[4*(n-1) + 2] != undefined">
+																	<div class="desc-img-outer" :class="{'showed': showingImg == 4*(n-1) + 2}" @click="showingImg = 4*(n-1) + 2">
+																		<div class="desc-img-inner">
+																			<img :src="selectingItem.imgs[4*(n-1) + 2]"/>
+																		</div>
+																	</div>
+																</div>
+																<div class="img-page-imgs" v-if="selectingItem.imgs[4*(n-1) + 3] != undefined">
+																	<div class="desc-img-outer" :class="{'showed': showingImg == 4*(n-1) + 3}" @click="showingImg = 4*(n-1) + 3">
+																		<div class="desc-img-inner">
+																			<img :src="selectingItem.imgs[4*(n-1) + 3]"/>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+
+														</div>
+													</div>
+												</div>
+												<div class="col-2">
+													<div class="page-btn" @click="nextPage">
+														<i class="fas fa-angle-right fa-2x"></i>
+													</div>
+												</div>
+											</div>
+
+											<div class="culture-desc-content">
+												<h4>介紹</h4>
+												<p v-text="selectingItem.desc"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="culture-middle">
+									<div class="culture-guide-map-div">
+										<h5>舊山線</h5>
+										<div class="culture-guide-map">
+											<img src="./assets/imgs/culture.png" />
+
+											<div v-for="(u, index) in contents" v-if="u != undefined" >
+												<span v-for="(item, ind) in u.layerContent" v-if="item.mapPos != undefined" v-text="item.title" class="culture-guide-map-item"
+													:class="{'actived': selectingId == item.id}" @click="selectingId = item.id" :style="{left: item.mapPos.x + 'px', top: item.mapPos.y + 'px', fontSize: item.mapPos.size}"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="culture-right">
+									<div class="culture-menu">
+										<div v-for="(u, index) in contents" v-if="u != undefined" >
+											<div class="culture-menu-head" :id="u.id" @click="layerClicked(u.id)">
+												<span class="culture-menu-icon icon-open">+</span>
+												<span class="culture-menu-icon icon-close">-</span>
+												<h6 v-text="u.layerName"></h6>
+											</div>
+											<div class="culture-menu-content">
+												<li v-for="(item, ind) in u.layerContent" v-text="item.title" class="culture-menu-item" :class="{'actived': selectingId == item.id}" @click="selectingId = item.id"></li>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+
+							<!-- <img class="img-fluid" src="./assets/imgs/bunkaFakePic.jpg"/> -->
+						</div>
+
+					</div>
+				</scetion>
+
+				<!-- <img src="assets/imgs/影音導覽網站_03鐵道文化.jpg" style="width: 100%;" /> -->
+			<% include include/footer %>
+		</div>
+	</body>
+</html>
+<% include include/scripts %>
+<script type="text/javascript" src="./assets/js/jquery.fancybox.min.js"></script>
+<script>
+  var app = null;
+
+  function initApp(){
+    app = new Vue({
+      el: '#app',
+      data: {
+				selectingId: '',
+				contents: [
+					{
+						layerName: '舊山線演進',
+						id: 'layer1',
+						layerContent: [
+							{
+								id: '1',
+								title: '測試',
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							}
+						]
+					},{
+						layerName: '細說舊山線',
+						id: 'layer2',
+						layerContent: [
+							{
+								id: '11',
+								title: '三義車站',
+								mapPos: {x:27, y:36, size:'16px'},
+								imgs: [
+									'./assets/imgs/banner-pic-media.jpg',
+									'./assets/imgs/banner-pic-bunka.jpg',
+									'./assets/imgs/banner-pic-index.jpg',
+									'./assets/imgs/banner-pic-internation.jpg',
+									'./assets/imgs/banner-pic-news.jpg',
+									'./assets/imgs/banner-pic-travel.jpg',
+								],
+								desc: '說明文字',
+							},{
+								id: '12',
+								title: '一號隧道',
+								mapPos: {x:170, y:143, size:'12px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '13',
+								title: '勝興車站',
+								mapPos: {x:175, y:164, size:'12px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '14',
+								title: '二號隧道',
+								mapPos: {x:190, y:190, size:'12px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '15',
+								title: '167號誌站',
+								mapPos: {x:194, y:230, size:'12px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '16',
+								title: '魚藤坪橋',
+								mapPos: {x:140, y:300, size:'12px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '18',
+								title: '三～六號隧道群',
+								mapPos: {x:96, y:347, size:'12px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '19',
+								title: '內社川橋',
+								mapPos: {x:133, y:386, size:'12px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '20',
+								title: '七號隧道',
+								mapPos: {x:133, y:432, size:'12px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '21',
+								title: '大安溪鐵橋',
+								mapPos: {x:130, y:475, size:'12px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '22',
+								title: '泰安車站',
+								mapPos: {x:122, y:528, size:'12px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '23',
+								title: '八號隧道',
+								mapPos: {x:64, y:581, size:'12px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '24',
+								title: '后里車站',
+								mapPos: {x:45, y:666, size:'12px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '25',
+								title: '九號隧道',
+								mapPos: {x:110, y:720, size:'12px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '26',
+								title: '大甲溪鐵橋',
+								mapPos: {x:110, y:760, size:'16px'},
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							},{
+								id: '2',
+								title: '其他',
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							}
+						],
+					},{
+						layerName: '族群移動誌',
+						id: 'layer3',
+						layerContent: [
+							{
+								id: '3',
+								title: '測試',
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							}
+						],
+					},{
+						layerName: '產業流動誌',
+						id: 'layer4',
+						layerContent: [
+							{
+								id: '4',
+								title: '測試',
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							}
+						],
+					},{
+						layerName: '文化記憶庫',
+						id: 'layer5',
+						layerContent: [
+							{
+								id: '5',
+								title: '測試',
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							}
+						],
+					},{
+						layerName: '鐵道技術史',
+						id: 'layer6',
+						layerContent: [
+							{
+								id: '6',
+								title: '測試',
+								imgs: [
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+									'./assets/imgs/culture.png',
+								],
+								desc: '說明文字',
+							}
+						],
+					},
+				],
+				showingImg: 0,
+				showingImgPage: 1,
+      },
+      watch: {
+				selectingId: function(val){
+					for(let k in this.contents){
+						const u = this.contents[k];
+						for(let k2 in u.layerContent){
+							const item = u.layerContent[k2];
+							if(val == item.id){
+								this.openLayer(u.id);
+								this.showingImg = 0;
+								this.showingImgPage = 1;
+							}
+						}
+					}
+				},
+      },
+      updated: function(){
+
+      },
+      computed: {
+				allSpots: function(){
+					let res = [];
+					for(let i=0;i<this.contents.length;i++){
+						for(let j=0;j<this.contents[i].layerContent.length;j++){
+							res.push(this.contents[i].layerContent[j]);
+						}
+					}
+					return res;
+				},
+				selectingItem: function(){
+					for(let k in this.contents){
+						const u = this.contents[k];
+						for(let k2 in u.layerContent){
+							const item = u.layerContent[k2];
+							if(this.selectingId == item.id){
+								return item;
+							}
+						}
+					}
+					return null;
+				},
+				selectingItemImgPageAmount: function(){
+					if(this.selectingItem!=null){
+						return parseInt((this.selectingItem.imgs.length-1) / 4) + 1;
+					}
+					return 0;
+				},
+      },
+      methods: {
+				closeAllLayer: function(){
+					$('.culture-menu-head').removeClass('actived');
+				},
+				openLayer: function(id){
+					this.closeAllLayer();
+					$('#'+id).addClass('actived');
+				},
+				layerClicked: function(id){
+					if($('#'+id).hasClass('actived')){
+						this.closeAllLayer();
+					}else{
+						this.openLayer(id);
+					}
+
+				},
+				selectingMorePhoto: function(){
+					var temp = [];
+					for(let i=0;i<this.selectingItem.imgs.length;i++){
+						temp.push({
+							src  : this.selectingItem.imgs[i],
+							opts : {
+							}
+						});
+					}
+					$.fancybox.open(temp, {
+						loop : true
+					});
+				},
+				nextPage: function(){
+					if(this.showingImgPage < this.selectingItemImgPageAmount){
+						this.showingImgPage++;
+					}
+				},
+				prevPage: function(){
+					if(this.showingImgPage >1){
+						this.showingImgPage--;
+					}
+				},
+      }
+    });
+  }
+
+  $(document).ready(function(){
+		initApp();
+		setNavActive('nav-culture');
+
+		app.selectingId = '11';
+  });
+</script>

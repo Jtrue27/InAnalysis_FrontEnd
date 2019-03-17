@@ -1,0 +1,162 @@
+
+@keyframes radar {
+    0% {
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      opacity: 1;
+    }
+    100% {
+      width: 120%;
+      height: 120%;
+      left: -10%;
+      top: -10%;
+      opacity: 0;
+    }
+}
+
+
+.traveler-banner{
+  position: relative;
+  min-height: 200px;
+  background: url('/assets/imgs/banner_bg2.jpg');
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.traveler-banner::before{
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.2;
+  z-index: 1;
+}
+
+.traveler-banner>div{
+  z-index: 2;
+}
+
+.traveler-banner h1{
+  color: #fff;
+  margin-bottom: 1em;
+  text-shadow: 0px 0px 10px #000000;
+}
+
+
+.traveler-title{
+  font-weight: 800;
+  padding: 2em 0;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+.traveler-unit{
+  margin: 1em 0 4em;
+  cursor: pointer;
+}
+
+.traveler-img-outer{
+  position: relative;
+  padding-top: 100%;
+}
+
+.traveler-img-inner{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+}
+
+.traveler-img-div{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.traveler-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.traveler-name{
+  width: 100%;
+  text-align: center;
+  font-size: 1.5em;
+  color: #ffa128;
+}
+
+@media (min-width: 768px){
+
+  .traveler-banner{
+    min-height: 300px;
+  }
+
+
+  .traveler-unit{
+    position: relative;
+    margin: 2em 0;
+  }
+
+  .traveler-img-outer{
+  }
+
+  .traveler-img-inner{
+    border-radius: 50%;
+  }
+
+  .traveler-img-div::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-radius: 50%;
+    animation: radar 1.5s linear 0s infinite;
+    border: solid 5px #ffb155;
+    visibility: hidden;
+  }
+
+  .traveler-unit:hover .traveler-img-div::before{
+    visibility: initial;
+  }
+
+  .traveler-name{
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    width: calc( 100% - 32px );
+    height: calc( 100% - 32px );
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity .4s ease;
+    background-color: #0000005c;
+    opacity: 0;
+  }
+
+  .traveler-unit:hover .traveler-name{
+    opacity: 1;
+  }
+
+}
+
+
+@media (min-width: 1024px){
+
+}

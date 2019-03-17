@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>蹦世界小工具</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.2/css/bootstrap-slider.min.css" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <style>
+
+    </style>
+	</head>
+	<body>
+    <div class="container">
+      <section id="app" class="my-5">
+        <h2 class="text-center">多語言導覽內容翻譯</h2>
+        <div class="my-5">
+          <textarea v-model="inputTranlate" class="form-control" rows="8" placeholder="請輸入導覽中文內容(250字以內)"></textarea>
+          <button class="btn btn-lg btn-block btn-success my-2" :disabled="ajaxing" @click="transBtnClicked">翻譯</button>
+        </div>
+
+        <div class="mt-5">
+          <h2 class="text-center">英文翻譯結果(訊飛)</h2>
+          <textarea v-text="translateResEn" class="form-control" rows="8" readonly></textarea>
+        </div>
+
+        <div class="mt-5">
+          <h2 class="text-center">日文翻譯結果(估狗)</h2>
+          <textarea v-text="translateResJp" class="form-control" rows="8" readonly></textarea>
+        </div>
+
+        <div class="mt-5">
+          <h2 class="text-center">韓文翻譯結果(估狗)</h2>
+          <textarea v-text="translateResKo" class="form-control" rows="8" readonly></textarea>
+        </div>
+
+      </section>
+
+    </div>
+
+	</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.2/bootstrap-slider.min.js" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+  var app = null;
+
+
+  function initApp(){
+		app = new Vue({
+			el: '#app',
+			data: {
+        ajaxing: false,
+        inputTranlate: '',
+        translateResEn: '',
+        translateResJp: '',
+        translateResKo: '',
+      },
+			watch: {
+
+			},
+			updated: function(){
+
+			},
+			computed: {
+
+			},
+			methods: {
+        transBtnClicked: function(){
+					const _this = this;
+					const data = {
+						text: _this.inputTranlate,
+						from: 'cn',
+						to: 'en',
+					};
+					xfyunTranslate(data, function(){
+            _this.ajaxing = true;
+          }, function(){
+            _this.ajaxing = false;
+            _this.transEnToJp();
+          }, function(d){
+            console.log(d);
+						_this.translateResEn = d.trans_result.dst;
+
+          });
+				},
+
+        transEnToJp: function(){
+          const _this = this;
+          transAPI({
+            text: _this.translateResEn,
+            src: 'en',
+            target: 'ja',
+          }, function(){
+            //before
+            _this.ajaxing = true;
+          }, function(){
+            //after
+            _this.ajaxing = false;
+            _this.transEnToKo();
+          }, function(d){
+            //callback
+            console.log(d);
+            const j = JSON.parse(d);
+            _this.translateResJp = j.data.translations[0].translatedText;
+
+          }, function(err){
+            //error
+            console.error(err);
+          });
+        },
+
+        transEnToKo: function(){
+          const _this = this;
+          transAPI({
+            text: _this.translateResEn,
+            src: 'en',
+            target: 'ko',
+          }, function(){
+            //before
+            _this.ajaxing = true;
+          }, function(){
+            //after
+            _this.ajaxing = false;
+          }, function(d){
+            //callback
+            console.log(d);
+            const j = JSON.parse(d);
+            _this.translateResKo = j.data.translations[0].translatedText;
+          }, function(err){
+            //error
+            console.error(err);
+          });
+        },
+
+			}
+		});
+	}
+
+  function xfyunTranslate(data, beforeAction, afterAction, callback, error){
+    $.ajax({
+      url: '/xfyun',
+      data: JSON.stringify(data),
+      method: 'POST',
+      contentType : 'application/json',
+      beforeSend: function(){
+        if(beforeAction!=null){
+          beforeAction();
+        }
+      },
+      success: function(d){
+        if(callback!=null){
+          callback(d);
+        }
+      },
+      error: function(e, e2, e3){
+        if(error!=null){
+          error(e);
+        }
+      },
+      complete: function(){
+        if(afterAction!=null){
+          afterAction();
+        }
+      }
+    });
+  }
+
+  function transAPI(data, beforeAction, afterAction, callback, error){
+    $.ajax({
+      url: '/translate',
+      data: JSON.stringify(data),
+      method: 'POST',
+      contentType : 'application/json',
+      beforeSend: function(){
+        if(beforeAction!=null){
+          beforeAction();
+        }
+      },
+      success: function(d){
+        if(callback!=null){
+          callback(d);
+        }
+      },
+      error: function(e, e2, e3){
+        if(error!=null){
+          error(e);
+        }
+      },
+      complete: function(){
+        if(afterAction!=null){
+          afterAction();
+        }
+      }
+    });
+  }
+
+  $(document).ready(function(){
+    initApp();
+  });
+</script>

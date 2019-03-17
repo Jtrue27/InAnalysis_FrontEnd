@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html id="top">
+	<head>
+    <title>Popworld</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<% include include/css %>
+    <link rel="stylesheet" href="/assets/css/pop_login.css" />
+
+		<link rel="icon"
+      type="image/png"
+      href="/assets/imgs/web_title_icon.png">
+		<meta property="og:title" content="Popworld蹦世界"></meta>
+		<meta property="og:type" content="website"></meta>
+		<meta property="og:description" content="自助旅行，背包客，省錢必備手機導遊!"></meta>
+		<meta property="og:image" content="/assets/imgs/icon.jpg"></meta>
+
+  </head>
+	<body>
+		<div id="app">
+      <% include include/nav %>
+      <div class="main-body pt-5">
+
+        <div class="container">
+
+          <section class="login-panel">
+            <h3 class="login-title">歡迎來到蹦世界</h3>
+            <div class="form-div">
+
+              <div class="text-center py-2 py-md-5">
+                <button class="btn btn-outline-primary btn-block py-md-2"><i class="fab fa-facebook-square"></i> 以Facebook帳號登入</button>
+              </div>
+
+              <div class="form-group">
+                <div class="form-label">帳號</div>
+                <input class="form-control" name="user_email" type="email" />
+              </div>
+
+              <div class="form-group">
+                <div class="form-label">密碼</div>
+                <input class="form-control" name="password" type="password" />
+                <div class="form-hint"><a href="#">忘記密碼</a></div>
+              </div>
+
+              <div>
+                <button class="btn btn-info btn-block">帳號登入</button>
+                <button class="btn btn-warning btn-block">註冊新帳號</button>
+              </div>
+
+              <div>
+                <div>
+                  登入即代表您同意<a href="#">使用者條款</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+			<% include include/footer %>
+		</div>
+	</body>
+</html>
+<% include include/scripts %>
+
+<script>
+  var app = null;
+
+  function initApp(){
+    app = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      watch: {
+
+      },
+      updated: function(){
+
+      },
+      computed: {
+
+      },
+      methods: {
+
+      }
+    });
+  }
+
+
+
+  $(document).ready(function(){
+		initApp();
+
+  });
+</script>

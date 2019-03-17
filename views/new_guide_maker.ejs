@@ -1,0 +1,1618 @@
+<!DOCTYPE HTML>
+<html id="top">
+	<head>
+    <title>Popworld 導覽製作流程</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<% include include/css %>
+
+    <style>
+
+			/* global */
+			.editorBorder{
+				border: solid 1px #000;
+		    padding: 1em;
+		    border-radius: .5em;
+		    background-color: #fff;
+			}
+
+		  /* create guide */
+			.create_card{
+				max-width: 400px;
+		    margin: 0 auto;
+		    box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.5);
+			}
+
+			.create_card small{
+				color: #999;
+			}
+
+			.ask-for-pic{
+				cursor: pointer;
+				position: relative;
+			}
+
+			.ask-for-pic>.add-panel{
+				width: 100%;
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				color: #999;
+				border: dashed 2px #999;
+				border-radius: .3em;
+			}
+
+			.ask-for-pic>.pic-panel{
+				background-color: #444;
+		    width: 100%;
+		    height: 100%;
+			}
+
+			.ask-for-pic>.pic-panel>img{
+				width: 100%;
+		    height: 100%;
+		    object-fit: contain;
+			}
+
+
+			.ask-for-pic>.pic-panel>.hint{
+				color: #fff;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0,0,0,.5);
+				opacity: 0;
+				transition: opacity .4s ease;
+				display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    font-size: 2em;
+			}
+
+			.ask-for-pic:hover>.pic-panel>.hint{
+				opacity: 1;
+			}
+
+			.back-btn{
+				color: #ddd;
+		    cursor: pointer;
+		    transition: color .4s ease;
+			}
+
+			.back-btn:hover{
+				color: #999;
+			}
+
+			.createGuideImage{
+				cursor: pointer;
+			}
+
+			.createGuideImagePlus{
+				text-align: center;
+		    padding: 4em 0;
+		    border: dashed 2px #999;
+		    color: #999;
+		    border-radius: .3em;
+			}
+
+			.createGuideImageDiv{
+				position: relative;
+			}
+
+			.createGuideImageDivHint{
+				color: #fff;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0,0,0,.5);
+				opacity: 0;
+				transition: opacity .4s ease;
+				display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    font-size: 2em;
+			}
+
+			.createGuideImage:hover .createGuideImageDivHint{
+				opacity: 1;
+			}
+
+			/* editor */
+			.mainEditor{
+				position: relative;
+			}
+
+			/* editor guide main */
+			.editorGuideMain{
+				padding: 2em;
+			}
+
+			.editGuideImageDiv{
+				position: relative;
+				cursor: pointer;
+			}
+
+			.editGuideImageHint{
+				color: #fff;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0,0,0,.5);
+				opacity: 0;
+				transition: opacity .4s ease;
+				display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    font-size: 2em;
+			}
+
+			.editGuideImageDiv:hover .editGuideImageHint{
+				opacity: 1;
+			}
+			/* editor spots map */
+			.stick-right{
+				position: absolute;
+		    transform: translate(20px, 0);
+			}
+
+			.editorSideBar{
+				list-style: none;
+		    padding: 0;
+				margin: 0;
+			}
+
+			.editorSideBar>li{
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+				color: #000;
+				padding: .5em;
+				cursor: pointer;
+				background-color: transparent;
+				transition: color .4s ease, background-color .4s ease;
+			}
+
+			.editorSideBar>li:hover{
+				color: #fff;
+				background-color: #000;
+			}
+
+			.editorSideBar>li:not(:last-child){
+				border-bottom: solid 1px #000;
+			}
+
+			.mapContainer{
+				position: relative;
+			}
+
+			.spotMap{
+				width: 100%;
+				height: 100%;
+				min-height: 400px;
+			}
+
+			/* editor spot */
+			.editorSpotMediaDiv{
+				padding: 10px;
+		    background-color: #e5efed;
+		    border-radius: 5px;
+			}
+
+			.editorSpotMediaContainer{
+				height: 200px;
+				position: relative;
+				background-color: #f1f7f6;
+				display: flex;
+				flex-direction: row;
+				padding: 5px;
+				overflow-x: scroll;
+			}
+
+			.editorSpotMediaInner{
+				height: 100%;
+				padding: 15px;
+				background-color: rgba(0, 0, 0, 0.3);
+		    border-radius: 15px;
+				position: relative;
+				margin-right: 10px;
+			}
+
+			.editorSpotMediaInner>img{
+				max-height: 100%;
+			}
+
+			.editorSpotMediaInnerClose{
+				position: absolute;
+		    right: 15px;
+		    top: 15px;
+		    color: #fff;
+		    background-color: #000;
+		    width: 30px;
+		    height: 30px;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    border-radius: 50%;
+				cursor: pointer;
+		    opacity: 0;
+		    transition: opacity .4s ease;
+			}
+
+			.editorSpotMediaInner:hover .editorSpotMediaInnerClose{
+				opacity: 1;
+			}
+
+			.editorSpotMediaBtns{
+				background-color: transparent;
+		    display: flex;
+				flex-direction: column;
+		    justify-content: center;
+		    align-items: center;
+			}
+
+			.editorSpotVoiceDiv{
+				padding: 10px;
+		    background-color: #e5efed;
+		    border-radius: 5px;
+			}
+
+			.editorSpotVoiceContainer{
+				position: relative;
+				background-color: #f1f7f6;
+				display: flex;
+				flex-direction: row;
+				padding: 5px;
+			}
+			/* loading */
+			.fixed-loading{
+				position: fixed;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0,0,0,.5);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				color: #fff;
+			}
+
+			/* fix alert*/
+			.alert-div{
+				position: fixed;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    padding-top: 2em;
+		    padding-left: 2em;
+		    padding-right: 2em;
+			}
+    </style>
+  </head>
+	<body class="bg-light pt-4">
+		<div id="app">
+
+			<input type="file" class="d-none" id="createGuideImageUrl" onchange="readFileAndUpdateGuideImageSrc(this)">
+			<input type="file" class="d-none" id="addSpotImageUrl" onchange="readFileAndAppendSpotImageSrc(this)">
+			<input type="file" class="d-none" id="createSpotImageUrl" onchange="readFileAndUpdateNewSpotImageSrc(this)">
+
+
+			<div class="container">
+
+				<div>
+
+					<div class="mainEditor">
+
+						<div class="row">
+							<div class="col-auto">
+								<button class="btn btn-outline-secondary" @click="backStep" :class="{'invisible': step==0}"><i class="fas fa-arrow-circle-left"></i> 返回</button>
+							</div>
+
+							<div class="col">
+								<h2 class="text-center" v-text="stepTitle"></h2>
+							</div>
+
+							<div class="col-auto">
+								<button class="btn btn-success" @click="nextStep">下一步 <i class="fas fa-arrow-alt-circle-right"></i></button>
+							</div>
+						</div>
+
+
+						<div id="mainEditor" class="carousel slide" data-interval="false" data-keyboard="false">
+						  <div class="carousel-inner">
+
+								<!-- 導覽封面編輯 -->
+						    <div class="carousel-item active">
+
+									<div class="editorGuideMain">
+										<div class="row">
+
+											<div class="col-6">
+
+                        <div class="ask-for-pic" style="height:400px;" @click="guideImageFileClick">
+          								<div class="add-panel" v-show="guide_image_src.length == 0">
+														<i class="fas fa-2x fa-plus-circle"></i>
+														<span class="mx-2">導覽封面圖片</span>
+          								</div>
+          								<div class="pic-panel" v-show="guide_image_src.length > 0">
+          									<div class="hint">
+          										<span>變更封面圖片</span>
+          									</div>
+          									<img :src="guide_image_src"/>
+          								</div>
+            						</div>
+
+												<small>上傳的照片不可超過10MB</small>
+
+											</div>
+
+											<div class="col-6">
+
+												<div class="text-right">
+													<button type="button" class="btn btn-link text-dark" data-toggle="modal" data-target="#guideAdvanced">
+													  <i class="fas fa-ellipsis-h"></i>
+													</button>
+												</div>
+
+												<div class="form-group">
+													<label>導覽名稱</label>
+													<input type="text" class="form-control" id="guideTitleInput" placeholder="例如：台北城一日遊、淡水十大美食" v-model="guide_title">
+												</div>
+
+												<div class="form-group">
+													<label>導覽介紹</label>
+													<textarea class="form-control mt-1" id="guideDescInput" placeholder="用幾句話說明這份導覽吧" v-model="guide_desc" rows="5"></textarea>
+												</div>
+
+
+											</div>
+
+										</div>
+
+									</div>
+						    </div>
+
+								<!-- 編輯主畫面 -->
+						    <div class="carousel-item">
+									<div>
+										<div class="row">
+
+											<div class="col-6">
+
+												<!-- 新增景點與景點列表 -->
+												<div v-show="guide_map_tool == 'addSpotBtn'">
+
+													<div class="list-group">
+														<button type="button" class="list-group-item list-group-item-action" v-for="(item, index) in guide_spots" @click="showSpotInfoBySpotId(item.id)">
+															<i class="fas fa-map-marked-alt"></i> <span v-text="item.title"></span>
+														</button>
+														<button type="button" class="text-center list-group-item list-group-item-action list-group-item-info" @click="openCreateSpotPanel">
+															<i class="fas fa-plus"></i> 新增景點
+														</button>
+													</div>
+
+												</div>
+
+												<!-- 搜尋新增景點 -->
+												<div class="card" v-show="guide_map_tool == 'spotSearch'">
+													<div class="card-body">
+
+														<div class="mb-3">
+															<span class="back-btn" @click="cancelSearch"><i class="fas fa-2x fa-chevron-circle-left"></i></span>
+														</div>
+
+														<div>
+															<div class="input-group mb-3">
+															  <input type="text" class="form-control" id="mapSearchInput" placeholder="搜尋或從地圖點擊建立新景點" >
+															  <div class="input-group-append">
+															    <button class="btn btn-outline-info" type="button" onclick="mapSearchClicked()"><i class="fas fa-search"></i></button>
+															  </div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<!-- 新增景點資料輸入 -->
+												<div class="card" v-show="guide_map_tool == 'newSpot'">
+													<div class="card-body">
+
+														<div class="mb-3">
+															<span class="back-btn" @click="cancelNewSpot"><i class="fas fa-2x fa-chevron-circle-left"></i></span>
+														</div>
+
+														<div>
+															<input type="text" class="form-control mt-3" id="newSpotTitleInput" placeholder="輸入景點名稱" v-model="new_spot_title">
+															<div class="row mt-2">
+																<div class="col">
+																	<div class="ask-for-pic" style="height:200px;" @click="newSpotImageFileClick">
+																		<div class="add-panel" v-show="new_spot_image.length == 0">
+																			<i class="fas fa-2x fa-plus-circle"></i>
+																			<span class="mx-2">景點介紹圖片</span>
+																		</div>
+																		<div class="pic-panel" v-show="new_spot_image.length > 0">
+																			<div class="hint">
+																				<span>變更介紹圖片</span>
+																			</div>
+																			<img :src="new_spot_image"/>
+																		</div>
+					            						</div>
+																	<small>上傳的照片不可超過10MB</small>
+																</div>
+																<div class="col">
+																	<textarea class="form-control mt-1" style="height: 100%;" id="newSpotDescInput" placeholder="景點介紹" rows="5"  v-model="new_spot_desc"></textarea>
+																</div>
+															</div>
+															<div class="row mt-3 d-none">
+
+																<div class="col-6">
+																	<div class="input-group">
+																	  <div class="input-group-prepend">
+																	    <span class="input-group-text">緯度</span>
+																	  </div>
+																	  <input type="text" class="form-control" v-model="new_spot_lat" disabled>
+																	</div>
+																</div>
+																<div class="col-6">
+																	<div class="input-group">
+																	  <div class="input-group-prepend">
+																	    <span class="input-group-text">經度</span>
+																	  </div>
+																	  <input type="text" class="form-control" v-model="new_spot_lng" disabled>
+																	</div>
+																</div>
+																<div class="col-12">
+
+																</div>
+
+															</div>
+															<div class="text-center mt-3">
+																<small>※拖曳地圖上定位點可以調整景點位置</small><br/>
+																<button class="btn btn-sm btn-success" @click="createNewSpotClicked"><i class="far fa-save"></i> 新增</button>
+															</div>
+														</div>
+
+													</div>
+												</div>
+
+												<!-- 顯示選中景點資訊 -->
+												<div class="card" v-show="guide_map_tool == 'spotInfo'">
+													<div class="card-body">
+														<div class="mb-3">
+															<div class="row">
+																<div class="col-6">
+																	<span class="back-btn" @click="cancelSpotInfo"><i class="fas fa-2x fa-chevron-circle-left"></i></span>
+																</div>
+																<div class="col-6 text-right">
+																	<div class="btn-group">
+																	  <button type="button" class="btn btn-link text-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																	    <i class="fas fa-ellipsis-h"></i>
+																	  </button>
+																	  <div class="dropdown-menu">
+																			<a class="dropdown-item" href="#" @click="editSpotInfo"><i class="far fa-edit"></i> 進階編輯</a>
+																	    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#spotDelConfirmModal"><i class="far fa-trash-alt"></i> 刪除此景點</a>
+																	  </div>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+
+														<h5 class="text-center" v-text="editing_spot_title"></h5>
+														<div>
+															<div class="row mt-2">
+																<div class="col">
+																	<div class="ask-for-pic" style="height:200px">
+				            								<div class="pic-panel">
+				            									<img :src="editing_spot_images[0]"/>
+				            								</div>
+					            						</div>
+																</div>
+																<div class="col">
+																	<h6 class="pl-3 pt-2">景點介紹：</h6>
+																	<div v-text="editing_spot_desc">
+																	</div>
+																</div>
+															</div>
+															<div class="row mt-3 d-none">
+
+																<div class="col">
+																	<div class="input-group">
+																	  <div class="input-group-prepend">
+																	    <span class="input-group-text">緯度</span>
+																	  </div>
+																	  <input type="text" class="form-control" v-model="editing_spot_lat" disabled>
+																	</div>
+																</div>
+																<div class="col">
+																	<div class="input-group">
+																	  <div class="input-group-prepend">
+																	    <span class="input-group-text">經度</span>
+																	  </div>
+																	  <input type="text" class="form-control" v-model="editing_spot_lng" disabled>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+
+													</div>
+												</div>
+
+											</div>
+
+											<div class="col">
+												<div class="mapContainer">
+													<div id="spotMap" class="spotMap">
+													</div>
+												</div>
+											</div>
+
+										</div>
+
+									</div>
+						    </div>
+
+								<!-- 景點編輯 -->
+						    <div class="carousel-item">
+									<div class="editorBorder editorSpotMain">
+										<div class="row">
+
+											<div class="col">
+
+												<div class="mb-3">
+													<span class="back-btn" @click="cancelEditingSpot"><i class="fas fa-2x fa-chevron-circle-left"></i></span>
+												</div>
+
+												<div class="form-group">
+											    <label for="EditSpotTitle">景點名稱</label>
+											    <input type="text" class="form-control" id="EditSpotTitle" placeholder="請輸入景點名稱" v-model="editing_spot_title">
+											  </div>
+
+												<div class="form-group">
+											    <textarea class="form-control mt-3" placeholder="景點介紹" v-model="editing_spot_desc" rows="5"></textarea>
+											  </div>
+
+												<div class="editorSpotMediaDiv mb-3">
+													<label>景點多媒體介紹</label>
+													<div class="editorSpotMediaContainer">
+
+														<div v-if="editing_spot_video_id.length > 0" class="editorSpotMediaInner">
+															<iframe :src="'https://www.youtube.com/embed/'+editing_spot_video_id+'?rel=0&amp;showinfo=0'" frameborder="0" allow="encrypted-media" style="height:100%;" allowfullscreen="allowfullscreen"></iframe>
+															<span class="editorSpotMediaInnerClose" @click="deleteSpotVideo"><i class="fas fa-times"></i></span>
+														</div>
+
+														<div v-for="(item, index) in editing_spot_images" class="editorSpotMediaInner">
+															<img :src="item"/>
+															<span class="editorSpotMediaInnerClose" @click="deleteSpotImage(index)"><i class="fas fa-times"></i></span>
+														</div>
+
+														<div class="editorSpotMediaInner editorSpotMediaBtns">
+															<button class="btn btn-outline-success btn-block" @click="spotImageFileClick" v-if="editing_spot_images.length < 4"><i class="fas fa-camera"></i> 新增 照片/圖片</button>
+															<button class="btn btn-outline-primary btn-block" @click="openAddSpotVideoModal" v-if="editing_spot_video_id.length == 0"><i class="fas fa-video"></i> 新增 youtube影片</button>
+														</div>
+
+													</div>
+												</div>
+
+												<div class="editorSpotVoiceDiv mb-3">
+													<label>景點語音介紹</label>
+													<div class="editorSpotVoiceContainer">
+
+														<div v-if="editing_spot_voice.length > 0">
+															<audio controls="controls" :src="editing_spot_voice">
+															  <source type="audio/mp3"  />
+															Your browser does not support the audio element.
+															</audio>
+															<br/>
+															<button class="btn btn-outline-danger mt-2" @click="removeEditingSpotVoice">移除語音</button>
+														</div>
+
+														<div v-if="editing_spot_voice.length == 0">
+															<input type="file" accept="audio/*" onchange="spotVoiceSelected(this)"></input>
+														</div>
+
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+
+										<div class="text-right mb-2">
+											<button class="btn btn-sm btn-outline-info" type="button" data-toggle="collapse" data-target="#spotMoreSetting" aria-expanded="false" aria-controls="spotMoreSetting">更多 <i class="fas fa-angle-down"></i></button>
+										</div>
+
+										<div class="collapse" id="spotMoreSetting">
+											<div class="card card-body">
+
+												<div class="form-group">
+													<label>景點位置</label>
+													<div class="row">
+														<div class="col">
+															<div class="input-group">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">經度</span>
+																</div>
+																<input type="number" class="form-control" v-model="editing_spot_lng">
+															</div>
+														</div>
+
+														<div class="col">
+															<div class="input-group">
+																<div class="input-group-prepend">
+																	<span class="input-group-text">緯度</span>
+																</div>
+																<input type="number" class="form-control" v-model="editing_spot_lat">
+															</div>
+														</div>
+													</div>
+												</div>
+
+  										</div>
+										</div>
+
+										<div class="text-center mt-3">
+											<button class="btn btn-success" :disabled="!editingSpotSaveBtnValidate" @click="saveEditingSpot"><i class="far fa-save"></i> 儲存</button>
+										</div>
+									</div>
+						    </div>
+
+						  </div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<!-- alert -->
+				<div class="alert-div">
+				</div>
+
+
+			</div>
+
+
+			<!-- modals -->
+			<div>
+
+				<!-- 導覽進階設定 -->
+				<div class="modal fade" id="guideAdvanced" tabindex="-1" role="dialog" aria-labelledby="guideAdvancedModal" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title">進階設定</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <div>
+
+									<div class="form-group">
+										<label>導覽語言</label>
+										<select class="form-control" v-model="guide_language">
+											<option value="0">繁體中文</option>
+											<option value="1">English</option>
+											<option value="2">简体中文</option>
+											<option value="3">日本語</option>
+											<option value="4">한국어</option>
+											<option value="5">台語</option>
+											<option value="6">русский язык</option>
+											<option value="7">Tiếng Việt</option>
+											<option value="8">ไทย</option>
+											<option value="9">Bahasa Melayu</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label>導覽分類</label>
+										<select class="form-control" v-model="guide_type">
+											<option value="0">休閒美景</option>
+											<option value="1">歷史文化</option>
+											<option value="2">自然生物</option>
+											<option value="3">農場民宿</option>
+											<option value="4">博物館</option>
+											<option value="5">文創藝術</option>
+											<option value="6">美食</option>
+											<option value="7">逛街購物</option>
+											<option value="8">單車</option>
+											<option value="9">登山</option>
+											<option value="10">展覽</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label>導覽位置</label>
+										<div class="row">
+											<div class="col">
+												<div class="input-group">
+													<div class="input-group-prepend">
+														<span class="input-group-text">經度</span>
+													</div>
+													<input type="number" class="form-control" v-model="guide_lng">
+												</div>
+											</div>
+
+											<div class="col">
+												<div class="input-group">
+													<div class="input-group-prepend">
+														<span class="input-group-text">緯度</span>
+													</div>
+													<input type="number" class="form-control" v-model="guide_lat">
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+				        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="far fa-save"></i> 儲存</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
+				<!-- 是否確定修改景點位置 -->
+				<div class="modal fade" id="spotMoveConfirmModal" tabindex="-1" role="dialog" aria-labelledby="spotMoveConfirmModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-body">
+								<h4 class="text-center">確定修改<span class="text-danger" v-text="editing_spot_title"></span>的位置？</h4>
+								<div class="text-center">
+									<button type="button" class="btn btn-secondary" onclick="spotPosMoveCancel()">放棄</button>
+									<button type="button" class="btn btn-primary" onclick="spotPosMoveConfirm()">確定</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 是否確定刪除景點 -->
+				<div class="modal fade" id="spotDelConfirmModal" tabindex="-1" role="dialog" aria-labelledby="spotDelConfirmModal" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-body">
+								<h4 class="text-center">確定刪除<span class="text-danger" v-text="editing_spot_title"></span>？</h4>
+								<div class="text-center">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">放棄</button>
+									<button type="button" class="btn btn-primary" @click="deleteEditingSpot">確定</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- youtube影片 -->
+				<div class="modal fade" id="spotAppendVideoModal" tabindex="-1" role="dialog" aria-labelledby="spotAppendVideoModal" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">請輸入youtube影片網址</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="youtube影片連結" v-model="editing_spot_input_video_url">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+								<button type="button" class="btn btn-primary" @click="setSpotVideo">新增影片</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="fixed-loading" v-show="ajaxing">
+				<i class="fas fa-spinner fa-3x fa-spin"></i>
+			</div>
+
+		</div>
+	</body>
+</html>
+<% include include/scripts %>
+<script>
+  var app = null;
+
+  function initApp(){
+    app = new Vue({
+      el: '#app',
+      data: {
+				ajaxing: false,
+
+				step: 0,
+				guide_map_tool: 'addSpotBtn',
+
+				guide_id: -1,
+				guide_title: '',
+				guide_image_src: '',
+				guide_desc: '',
+				guide_language: '0',
+				guide_type: '0',
+				guide_lng: 120.8,
+				guide_lat: 23.7,
+				guide_publicity: "2",
+
+				new_spot_title: '',
+				new_spot_image: '',
+				new_spot_desc: '',
+				new_spot_lat: 0,
+				new_spot_lng: 0,
+
+				guide_spots: [],
+
+				editing_spot_id: -1,
+				editing_spot_title: '',
+				editing_spot_desc: '',
+				editing_spot_voice: '',
+				editing_spot_video_id: '',
+				editing_spot_images: [],
+				editing_spot_lng: 0,
+				editing_spot_lat: 0,
+
+				editing_spot_input_video_url: '',
+
+				infowindow: null,
+      },
+      mounted: function(){
+
+      },
+      watch: {
+				guide_lng: function(val){
+					this.guide_lng = parseFloat(val);
+				},
+				guide_lat: function(val){
+					this.guide_lat = parseFloat(val);
+				},
+				editing_spot_lng: function(val){
+					this.editing_spot_lng = parseFloat(val);
+				},
+				editing_spot_lat: function(val){
+					this.editing_spot_lat = parseFloat(val);
+				},
+      },
+      updated: function(){
+
+      },
+      computed: {
+				stepTitle:function(){
+					//目前所在步驟的title說明
+					if(this.step == 0){
+						return '導覽封面';
+					}else if(this.step == 1){
+						return '景點介紹';
+					}else if(this.step == 2){
+						return '景點詳細介紹';
+					}else{
+						return '未知的步驟';
+					}
+				},
+
+				editGuideSaveBtnEnable: function(){
+					return this.guide_title.length > 0 && this.guide_image_src.length > 0 && this.guide_desc.length > 0;
+				},
+				videoInputID: function(){
+          name = 'v';
+          var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+              results = regex.exec(this.editing_spot_input_video_url);
+          if (!results) return null;
+          if (!results[2]) return '';
+          return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        },
+				editingSpotObj: function(){
+					var obj = {};
+					obj.id = this.editing_spot_id;
+					obj.title = this.editing_spot_title;
+					obj.desc = this.editing_spot_desc;
+					obj.voice = this.editing_spot_voice;
+					obj.video_id = this.editing_spot_video_id;
+					obj.images = this.editing_spot_images;
+					obj.lng = this.editing_spot_lng;
+					obj.lat = this.editing_spot_lat;
+					return obj;
+				},
+				editingSpotSaveBtnValidate: function(){
+					if(this.editingSpotObj.title.trim().length == 0){
+						return false;
+					}
+					return true;
+				}
+      },
+      methods: {
+				//切換
+				gotoGuideEditor: function(){
+					$('#mainEditor').carousel(0);
+					this.step = 0;
+				},
+				gotoMapEditor: function(){
+					$('#mainEditor').carousel(1);
+					$('#spotMoreSetting').collapse('hide');
+					initMap();
+					this.step = 1;
+				},
+				gotoSpotEditor: function(){
+					$('#mainEditor').carousel(2);
+					this.step = 2;
+				},
+
+				backStep: function(){
+					if(this.step == 1){
+						this.backToGuideEdit();
+					}else if(this.step == 2){
+
+					}
+				},
+				nextStep: function(){
+					if(this.step == 0){
+						this.guideEditFinished();
+					}else if(this.step == 1){
+
+					}else if(this.step == 2){
+
+					}
+				},
+
+				//地圖工具的切換
+				toAddSpotBtn: function(){
+					if(this.guide_map_tool == 'addSpotBtn'){
+						return;
+					}
+					this.guide_map_tool = 'addSpotBtn';
+				},
+				toSpotSearch: function(){
+					if(this.guide_map_tool == 'spotSearch'){
+						return;
+					}
+					clearTempMarker();
+					this.guide_map_tool = 'spotSearch';
+				},
+				toNewSpotPanel: function(){
+					if(this.guide_map_tool == 'newSpot'){
+						return;
+					}
+					this.newSpotPanelInit();
+					this.guide_map_tool = 'newSpot';
+				},
+				toSpotInfoPanel: function(){
+					if(this.guide_map_tool == 'spotInfo'){
+						return;
+					}
+					this.guide_map_tool = 'spotInfo';
+				},
+
+
+				//一些panel的initial
+				newSpotPanelInit: function(){
+					this.new_spot_title = '';
+					this.new_spot_image = '';
+					this.new_spot_desc = '';
+					this.new_spot_lat = 0;
+					this.new_spot_lng = 0;
+				},
+
+
+        //各種需要儲存到資料庫的動作
+				createGuide: function(callback){
+					//新建導覽到資料庫
+					if(callback!=undefined){
+						callback();
+					}
+				},
+				updateGuide: function(callback){
+					//更新導覽到資料庫
+					if(callback!=undefined){
+						callback();
+					}
+				},
+				createNewSpot: function(callback){
+					//建立新景點到此導覽中
+					var spotObj = {};
+					spotObj.title = this.new_spot_title;
+					spotObj.images = [];
+					spotObj.images.push(this.new_spot_image);
+					spotObj.video_id = '';
+					spotObj.voice = '';
+					spotObj.desc = this.new_spot_desc;
+					spotObj.lat = this.new_spot_lat;
+					spotObj.lng = this.new_spot_lng;
+
+					//這邊之後要換成真的寫進資料庫
+					spotObj.id = new Date().getTime();
+					this.guide_spots.push(spotObj);
+
+					if(callback!=undefined){
+						callback(spotObj);
+					}
+				},
+
+				//各種從資料庫讀取資料的動作
+				readAllSpots: function(guide_id, callback){
+					//讀取指定導覽中所有景點
+					if(guide_id == undefined){
+						guide_id = this.guide_id;
+					}
+					//這邊要切換成從資料庫讀取到的景點們
+					const spots = [...this.guide_spots];
+
+					if(callback != undefined){
+						callback(this.guide_spots);
+					}
+				},
+
+				//KeyEvents
+				inputGuideTitleOnEnterKey: function(){
+					if(this.guide_desc.length > 0){
+						$('#guideEditFinishBtn').click();
+					}else{
+						$('#guideDescInput').focus();
+					}
+				},
+
+
+
+				//
+				guideEditFinished: function(){
+					//導覽編輯畫面，點擊前往景點編輯的動作
+					if(this.guide_image_src.length == 0){
+						msgAlert('請選擇導覽封面圖片！', '', 'danger');
+						return;
+					}
+					if(this.guide_title.length == 0){
+						msgAlert('請輸入導覽名稱！', '', 'danger');
+						$('#guideTitleInput').focus();
+						return;
+					}
+					if(this.guide_desc.length == 0){
+						msgAlert('請輸入導覽介紹！', '', 'danger');
+						$('#guideDescInput').focus();
+						return;
+					}
+					//檢查通過，儲存並進到下一步
+					if(this.guide_id == -1){
+						this.createGuide(this.guideEditFinishedCallback);
+					}else{
+						this.updateGuide(this.guideEditFinishedCallback);
+					}
+        },
+				guideEditFinishedCallback: function(){
+					//導覽編輯完成(包含對資料庫動作後)的後續動作
+					this.mapEditorRefresh();
+				},
+				mapEditorRefresh: function(){
+					//景點地圖畫面讀取資料並重整
+					const _this = this;
+					this.readAllSpots(this.guide_id, function(spots){
+						_this.guide_spots = spots;
+						refreshMapWithSpots(_this.guide_spots);
+						clearTempMarker();
+						_this.gotoMapEditor();
+					});
+				},
+				setNewSpotValue: function(lat, lng, title){
+					//將資訊填入新增景點的區域
+					this.toNewSpotPanel();
+					if(title!=undefined){
+						this.new_spot_title = title;
+					}
+					this.new_spot_lat = lat;
+					this.new_spot_lng = lng;
+				},
+				cancelNewSpot: function(){
+					//放棄新增景點
+					this.toSpotSearch();
+				},
+				cancelSearch: function(){
+					//放棄搜尋
+					this.toAddSpotBtn();
+				},
+				createNewSpotClicked: function(){
+					//嘗試建立新的Spot
+
+					if(this.new_spot_title.trim().length == 0){
+						msgAlert('請輸入景點名稱！', '', 'danger');
+						$('#newSpotTitleInput').focus();
+						return;
+					}
+					if(this.new_spot_image.length == 0){
+						msgAlert('請選擇景點的介紹照片', '', 'danger');
+						return;
+					}
+					if(this.new_spot_desc.trim().length == 0){
+						msgAlert('請輸入景點介紹！', '', 'danger');
+						$('#newSpotDescInput').focus();
+						return;
+					}
+
+					const _this = this;
+					//通過檢查
+					this.createNewSpot(function(){
+						_this.toAddSpotBtn();
+						_this.mapEditorRefresh();
+					});
+				},
+				openCreateSpotPanel: function(){
+					//點擊建立新景點的按鈕(打開panel)
+					this.toSpotSearch();
+				},
+				showSpotInfoBySpotId: function(spot_id){
+					//點擊地圖上的spot marker或點擊spot list
+					this.setSelectingSpotId(spot_id);
+				},
+				findSpotObjById: function(id){
+					//從景點列表中找出特定ID的景點
+					if(id == -1){
+						return null;
+					}
+					for(var i=0;i<this.guide_spots.length;i++){
+						if(this.guide_spots[i].id == id){
+							return this.guide_spots[i];
+						}
+					}
+					return null;
+				},
+				setSelectingSpotId: function(id){
+					//選擇了特定id的spot
+					this.toSpotInfoPanel();
+					var obj = this.findSpotObjById(id);
+					if(obj != null){
+						this.editing_spot_id = id;
+						this.editing_spot_title = obj.title;
+						this.editing_spot_desc = obj.desc;
+						this.editing_spot_voice = obj.voice;
+						this.editing_spot_video_id = obj.video_id;
+						this.editing_spot_images = [...obj.images];
+						this.editing_spot_lng = obj.lng;
+						this.editing_spot_lat = obj.lat;
+
+						showInfoWindowForSpot(id, obj.title);
+					}
+				},
+				cancelSpotInfo: function(){
+					//從景點資料返回
+					this.toAddSpotBtn();
+				},
+				editSpotInfo: function(){
+					//進到景點的詳細編輯
+					this.gotoSpotEditor();
+				},
+				deleteSpotImage: function(index){
+					//從正在編輯的景點的圖片清單中移除一張
+					this.editing_spot_images.splice(index, 1);
+				},
+				openAddSpotVideoModal: function(){
+					//開啟添加影片的modal
+					this.editing_spot_input_video_url = '';
+					$('#spotAppendVideoModal').modal('show');
+				},
+				deleteSpotVideo: function(){
+					//刪除正在編輯的景點的影片
+					this.editing_spot_video_id = '';
+				},
+				setSpotVideo: function(){
+					//設定正在編輯中的景點的影片
+					if(this.videoInputID && this.videoInputID.length>0){
+						this.editing_spot_video_id = this.videoInputID;
+					}
+					$('#spotAppendVideoModal').modal('hide');
+				},
+				removeEditingSpotVoice: function(){
+					//移除正在編輯中的景點的聲音檔
+					this.editing_spot_voice = '';
+				},
+
+				guideImageFileClick: function(){
+					$('#createGuideImageUrl').click();
+				},
+				spotImageFileClick: function(){
+					$('#addSpotImageUrl').click();
+				},
+				newSpotImageFileClick: function(){
+					$('#createSpotImageUrl').click();
+				},
+				saveEditingSpot: function(){
+					//儲存正在編輯的景點的變更
+					var tmp = this.findSpotObjById(this.editing_spot_id);
+					tmp.title = this.editing_spot_title;
+					tmp.desc = this.editing_spot_desc;
+					tmp.voice = this.editing_spot_voice;
+					tmp.video_id = this.editing_spot_video_id;
+					tmp.images = this.editing_spot_images;
+					tmp.lng = this.editing_spot_lng;
+					tmp.lat = this.editing_spot_lat;
+
+					refreshMapWithSpots(this.guide_spots);
+					const _this = this;
+					this.readAllSpots(this.guide_id, function(spots){
+						_this.guide_spots = spots;
+						refreshMapWithSpots(_this.guide_spots);
+						clearTempMarker();
+						_this.gotoMapEditor();
+						_this.toAddSpotBtn();
+					});
+				},
+				updateEditingSpotPos: function(){
+					//儲存正在編輯的景點的位置
+					var tmp = this.findSpotObjById(this.editing_spot_id);
+					tmp.lng = this.editing_spot_lng;
+					tmp.lat = this.editing_spot_lat;
+				},
+				cancelEditingSpot: function(){
+					//放棄儲存正在編輯的景點
+					this.toAddSpotBtn();
+					this.gotoMapEditor();
+				},
+				backToGuideEdit: function(){
+					//地圖頁點下返回
+					this.gotoGuideEditor();
+				},
+				deleteEditingSpot: function(){
+					//移除正在編輯的景點
+
+					//這邊要套資料庫  先偷懶
+					for(var i=0;i<this.guide_spots.length;i++){
+						if(this.guide_spots[i].id == this.editing_spot_id){
+							this.guide_spots.splice(i, 1);
+							break;
+						}
+					}
+
+					this.toAddSpotBtn();
+
+					refreshMapWithSpots(this.guide_spots);
+					$('#spotDelConfirmModal').modal('hide');
+				},
+
+				spotOrderDown: function(index){
+					//將景點的順序往下移動
+					if(index < this.guide_spots.length - 1){
+						var tmp = this.guide_spots[index];
+						this.guide_spots.splice(index, 1);
+						this.guide_spots.splice(index+1, 0, tmp);
+					}
+				},
+				spotOrderUp: function(index){
+					//將景點的順序往上移動
+					if(index > 0){
+						var tmp = this.guide_spots[index];
+						this.guide_spots.splice(index, 1);
+						this.guide_spots.splice(index-1, 0, tmp);
+					}
+				},
+
+      }
+    });
+  }
+
+	function readFileAndUpdateGuideImageSrc(input) {
+		//導覽封面的圖片變更
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+				app.guide_image_src = e.target.result;
+	    }
+	    reader.readAsDataURL(input.files[0]);
+	  }
+	}
+
+	function readFileAndAppendSpotImageSrc(input){
+		//景點編輯的圖片追加
+		if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+				app.editing_spot_images.push(e.target.result);
+	    }
+	    reader.readAsDataURL(input.files[0]);
+	  }
+	}
+
+	function readFileAndUpdateNewSpotImageSrc(input) {
+		//新增景點的圖片變更
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+				app.new_spot_image = e.target.result;
+	    }
+	    reader.readAsDataURL(input.files[0]);
+	  }
+	}
+
+	function spotVoiceSelected(filelist){
+		//景點編輯的聲音檔變更
+		app.editing_spot_voice = URL.createObjectURL(filelist.files[0]);
+	}
+
+	var spotMap = null;
+	var searchBox;
+	var mapTempMarker;
+	var placeService;
+
+	function initMap() {
+		if(spotMap != null){
+			return;
+		}
+		var center = {lng: 120.8, lat: 23.7};
+
+		spotMap = new google.maps.Map(document.getElementById('spotMap'), {
+			center: center,
+			zoom: 7,
+			fullscreenControl: false,
+			streetViewControl: false,
+			mapTypeControl: false,
+		});
+
+		placeService = new google.maps.places.PlacesService(spotMap);
+
+		var searchInput = document.getElementById('mapSearchInput');
+    searchBox = new google.maps.places.SearchBox(searchInput);
+
+		searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+			processPlaces(places);
+    });
+
+		spotMap.addListener('dragstart', function(){
+
+		});
+
+		spotMap.addListener('dragend', function(){
+
+		});
+
+		spotMap.addListener('click', function(evt){
+			if(app.guide_map_tool == 'spotSearch'){
+				console.log(evt);
+				if(evt.placeId){
+					var req = {};
+					req.placeId = evt.placeId;
+					req.fields = ['photos', 'formatted_address', 'name', 'rating', 'opening_hours', 'geometry'];
+					placeService.getDetails(req, function(place){
+						if(place!=null){
+							choiceNewSpotPosition(place.geometry.location.lat(), place.geometry.location.lng(), place);
+						}
+					});
+				}else{
+					choiceNewSpotPosition(evt.latLng.lat(), evt.latLng.lng());
+				}
+			}
+		});
+
+	}
+
+	function clearTempMarker(){
+		//清除臨時的標記
+		if(mapTempMarker != null){
+			mapTempMarker.setMap(null);
+		}
+		mapTempMarker = null;
+		$('#mapSearchInput').val('');
+	}
+
+	function mapSearchClicked(){
+		//按下地圖搜尋按鈕
+		var req = {};
+		req.query = $('#mapSearchInput').val();
+		if(req.query.trim().length == 0){
+			return;
+		}
+		req.fields = ['photos', 'formatted_address', 'name', 'rating', 'opening_hours', 'geometry'];
+		placeService.findPlaceFromQuery(req, function(places){
+			if(places!=null){
+				processPlaces(places);
+			}
+		});
+	}
+
+	function mapTempMarkerDrag(event){
+		app.setNewSpotValue(event.latLng.lat(), event.latLng.lng());
+	}
+
+	function processPlaces(places){
+		//處理搜尋到的地點
+		if (places.length == 0) {
+			console.log('no place');
+			return;
+		}
+
+		const place = places[0];
+		choiceNewSpotPosition(place.geometry.location.lat(), place.geometry.location.lng(), place);
+	}
+
+	function choiceNewSpotPosition(lat, lng, place){
+		//地圖上選擇了新景點
+		clearTempMarker();
+
+		var title = 'undefined';
+		var position = {
+			lat: lat,
+			lng: lng,
+		};
+
+		if(place != undefined){
+			title = place.name;
+		}
+
+		mapTempMarker = new google.maps.Marker({
+			map: spotMap,
+			title: title,
+			position: position,
+			draggable: true,
+		});
+
+		mapTempMarker.addListener('drag', mapTempMarkerDrag);
+
+		if(place != undefined){
+			if (place.geometry.viewport) {
+				spotMap.fitBounds(place.geometry.viewport);
+			} else {
+				spotMap.fitBounds(place.geometry.location);
+			}
+			app.setNewSpotValue(lat, lng, title);
+		}else{
+			app.setNewSpotValue(lat, lng);
+		}
+	}
+
+	var originPos = {
+		lat: 0,
+		lng: 0,
+	};
+	function spotMarkerDragStart(event){
+		console.log('drag start.');
+		originPos.lat = event.latLng.lat();
+		originPos.lng = event.latLng.lng();
+	}
+
+	function spotMarkerDrag(event){
+		app.editing_spot_lng = event.latLng.lng();
+		app.editing_spot_lat = event.latLng.lat();
+	}
+
+	function spotMarkerDragEnd(event){
+		app.editing_spot_lng = event.latLng.lng();
+		app.editing_spot_lat = event.latLng.lat();
+		$("#spotMoveConfirmModal").modal({
+			backdrop: 'static',
+			keyboard: false,
+		});
+	}
+
+	function spotPosMoveCancel(){
+		app.editing_spot_lng = originPos.lng;
+		app.editing_spot_lat = originPos.lat;
+		for(var i=0;i<markers.length;i++){
+			if(markers[i]._spot_id == app.editing_spot_id){
+				markers[i].setPosition({
+					lng: originPos.lng,
+					lat: originPos.lat,
+				});
+			}
+		}
+		$("#spotMoveConfirmModal").modal('hide');
+	}
+
+	function spotPosMoveConfirm(){
+		app.updateEditingSpotPos();
+		$("#spotMoveConfirmModal").modal('hide');
+	}
+
+	function handleDragEvent(event) {
+		console.log('lat: '+event.latLng.lat());
+		console.log('lng: '+event.latLng.lng());
+	}
+
+	var markers = [];
+	var spotInfowindow = null;
+	var goldStar = {
+		path: 'M 0,-120 30,-35 120,-35 55,25 75,105 0,55 -75,105 -50,20 -120,-35 -30,-35 z',
+		fillColor: 'yellow',
+		fillOpacity: 1,
+		scale: 0.1,
+		strokeColor: 'gold',
+		strokeWeight: 2
+	};
+
+	var redStar = {
+		path: 'M 0,-120 30,-35 120,-35 55,25 75,105 0,55 -75,105 -50,20 -120,-35 -30,-35 z',
+		fillColor: 'red',
+		fillOpacity: 1,
+		scale: 0.1,
+		strokeColor: 'gold',
+		strokeWeight: 2
+	};
+
+	function refreshMapWithSpots(spots){
+		//根據景點清單在地圖上標記所有景點
+		for(var i=0;i<markers.length;i++){
+			markers[i].setMap(null);
+		}
+		markers = [];
+
+		for(var i=0;i<spots.length;i++){
+			const spotPos = {lng: spots[i].lng, lat: spots[i].lat};
+			const spotID = spots[i].id;
+			const spotMarker = new google.maps.Marker({
+				position: spotPos,
+				map: spotMap,
+				icon: goldStar,
+			});
+
+			spotMarker.addListener('dragstart', spotMarkerDragStart);
+			spotMarker.addListener('drag', spotMarkerDrag);
+    	spotMarker.addListener('dragend', spotMarkerDragEnd);
+			spotMarker.addListener('click', function(evt){
+				console.log(evt);
+				console.log('hi');
+				console.log(spotID);
+				app.showSpotInfoBySpotId(spotID);
+			});
+			spotMarker._spot_id = spotID;
+			markers.push(spotMarker);
+		}
+	}
+
+	function showInfoWindowForSpot(spot_id, spot_name){
+		//展現特定spot的資料視窗
+		if(spotInfowindow != null){
+			spotInfowindow.close();
+		}
+		if(spot_id != -1){
+			spotInfowindow = new google.maps.InfoWindow({
+	      content: '<div><h3>'+spot_name+'</h3><small class="text-danger">※拖曳編輯景點位置</span></div>'
+	    });
+			for(var i=0;i<markers.length;i++){
+				if(markers[i]._spot_id == spot_id){
+					spotMap.setCenter(markers[i].getPosition());
+					markers[i].setIcon(redStar);
+					markers[i].setDraggable(true);
+					spotInfowindow.open(spotMap, markers[i]);
+				}else{
+					markers[i].setIcon(goldStar);
+					markers[i].setDraggable(false);
+				}
+			}
+		}
+	}
+
+
+	/* alert */
+	function msgAlert(content, title, color_class, period){
+		if(!color_class){
+			color_class = 'primary';
+		}
+		if(!period){
+			period = 3000;
+		}
+		const $alertOuter = $('<div style="display:none; position: absolute; top: 1em; left: 10%; width: 80%;" class="alert alert-'+color_class+'" role="alert"></div>');
+		if(title!=undefined && title.length>0){
+			var $title = $('<h4 class="alert-heading text-center"></h4>');
+			$title.text(title);
+			$alertOuter.append($title);
+		}
+		var $content = $('<div class="text-center"></div>');
+		$content.text(content);
+		$alertOuter.append($content);
+		$('.alert-div').append($alertOuter);
+		$alertOuter.slideDown();
+		setTimeout(function(){
+			$alertOuter.slideUp(function(){$alertOuter.remove();});
+		}, period);
+	}
+
+
+
+  $(document).ready(function(){
+		initApp();
+  });
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPq1hNS-hLK2mv7hpDXJnG18c9ovlyHoM&libraries=places"></script>

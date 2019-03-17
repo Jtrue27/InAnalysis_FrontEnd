@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html id="top">
+	<head>
+		<% include include/meta %>
+		<% include include/css %>
+		<link rel="stylesheet" href="assets/css/news.css" />
+  </head>
+	<body>
+		<div id="app">
+			<% include include/nav %>
+
+				<section class="page-banner">
+					<img class="page-banner-bg" src="./assets/imgs/banner-pic-news.jpg" />
+					<h2 class="page-banner-title">最新消息</h2>
+				</section>
+
+				<section>
+					<div class="container py-4">
+
+						<nav aria-label="breadcrumb">
+						  <ol class="breadcrumb">
+						    <li class="breadcrumb-item"><a href="./">首頁</a></li>
+						    <li class="breadcrumb-item"><a href="./news">最新消息</a></li>
+								<li class="breadcrumb-item">內頁</li>
+						  </ol>
+						</nav>
+
+						<div class="main-content">
+							<div class="news-content">
+								<h3 class="news-card-title">「2018苗栗陶 臺灣柴燒藝術節」陶藝競賽簡章出爐.全國徵件</h3>
+								<h6 class="news-card-date">2018-06-06</h6>
+								<img class="img-fluid" src="./assets/imgs/newsFakePic.jpg"/>
+								<p class="mt-3">
+									這邊就會直接塞消息內容的HTML。
+								</p>
+							</div>
+						</div>
+
+					</div>
+				</scetion>
+
+				<!-- <img src="assets/imgs/影音導覽網站_02最新消息內頁.jpg" style="width: 100%;" /> -->
+			<% include include/footer %>
+		</div>
+	</body>
+</html>
+<% include include/scripts %>
+
+<script>
+  var app = null;
+
+  function initApp(){
+    app = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      watch: {
+
+      },
+      updated: function(){
+
+      },
+      computed: {
+
+      },
+      methods: {
+
+      }
+    });
+  }
+
+  $(document).ready(function(){
+		initApp();
+		setNavActive('nav-news');
+  });
+</script>

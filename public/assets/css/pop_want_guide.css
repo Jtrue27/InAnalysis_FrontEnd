@@ -1,0 +1,75 @@
+.want-guide-banner{
+  position: relative;
+  min-height: 200px;
+  background: url('/assets/imgs/banner_bg.jpg');
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.want-guide-banner::before{
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.2;
+  z-index: 1;
+}
+
+.want-guide-banner>div{
+  z-index: 2;
+}
+
+.want-guide-banner h1{
+  color: #fff;
+  margin-bottom: 1em;
+  text-shadow: 0px 0px 10px #000000;
+}
+
+
+.want-guide-form-title{
+  font-weight: 800;
+  padding: 2em 0;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+.want-guide-formdiv{
+
+}
+
+
+.want-guide-form{
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.down-hint{
+  font-size: .7em;
+}
+
+@media (min-width: 768px){
+
+  .want-guide-banner{
+    min-height: 300px;
+  }
+
+  .want-guide-form-title{
+    font-size: 2em;
+  }
+
+  .down-hint{
+    font-size: 1em;
+  }
+}
+
+
+@media (min-width: 1024px){
+
+}

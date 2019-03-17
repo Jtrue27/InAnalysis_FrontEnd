@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html id="top">
+	<head>
+		<% include include/meta %>
+		<% include include/css %>
+		<link rel="stylesheet" href="assets/css/media.css" />
+  </head>
+	<body>
+		<div id="app">
+			<% include include/nav %>
+
+				<section class="page-banner">
+					<img class="page-banner-bg" src="./assets/imgs/banner-pic-media.jpg" />
+					<h2 class="page-banner-title">影音導覽</h2>
+				</section>
+
+				<section>
+					<div class="container py-4">
+
+						<nav aria-label="breadcrumb">
+						  <ol class="breadcrumb">
+						    <li class="breadcrumb-item"><a href="./">首頁</a></li>
+						    <li class="breadcrumb-item"><a href="./media">影音導覽</a></li>
+								<li class="breadcrumb-item">內頁</li>
+						  </ol>
+						</nav>
+
+						<div class="main-content">
+
+							<div class="row">
+								<div class="col-12 col-lg-8">
+									<div v-if="selectingVideoObj != null">
+
+										<div>
+											<div class="media-content-video-outer">
+												<div class="media-content-video-inner">
+													<iframe :src="'https://www.youtube.com/embed/'+selectingVideoObj.videoYoutubeId+'?rel=0&amp;showinfo=0'" frameborder="0" allow="encrypted-media" allowfullscreen="allowfullscreen"></iframe>
+												</div>
+											</div>
+											<h3 class="font-weight-bold mt-4 mb-0" v-text="selectingVideoObj.videoNameZh"></h3>
+											<h6 class="text-muted" v-text="selectingVideoObj.videoNameEn"></h6>
+											<div class="mt-4" style="line-height: 2em;">
+												<p>
+													沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容<br/>
+													沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容<br/>
+													沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容沒內容
+												</p>
+											</div>
+										</div>
+
+										<div class="mb-5">
+											<div class="row">
+
+												<div class="col-4">
+													<button @click="preVideo()" class="btn btn-outline-secondary btn-block cus-btn-video-change">
+														<span class="icon left"><i class="fas fa-arrow-left"></i></span>
+														<span>上一部</span>
+													</button>
+												</div>
+
+												<div class="col-4">
+													<a href="./media" class="btn btn-outline-secondary btn-block cus-btn-video-change">
+														<span>返回</span><span class="d-none d-lg-inline-block">影音導覽列表</span>
+													</a>
+												</div>
+
+												<div class="col-4">
+													<button @click="nextVideo()" class="btn btn-outline-secondary btn-block cus-btn-video-change">
+														<span>下一部</span>
+														<span class="icon right"><i class="fas fa-arrow-right"></i></span>
+													</button>
+												</div>
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="col-12 col-lg-4">
+									<div>
+										<div class="other-video-title">
+											<h4 class="font-weight-bold">其他影音導覽</h4>
+										</div>
+
+										<div class="row">
+											<div class="col-6 col-lg-12" v-for="(item, index) in otherVideoList">
+												<a :href="'./mediaContent?id='+item.videoId" class="other-video-card">
+													<div class="row py-3">
+
+														<div class="col-12 col-lg-6">
+															<div class="video-list-pic-outer">
+																<div class="video-list-pic-inner">
+																	<img :src="item.videoPicUrl" class="video-list-pic" />
+																	<div class="other-video-list-pic-play">
+																		<i class="fas fa-play"></i>
+																	</div>
+																	<img :src="item.videoGifUrl" class="video-list-gif" />
+																</div>
+															</div>
+														</div>
+
+														<div class="col-12 col-lg-6">
+															<h5 class="font-weight-bold" v-text="item.videoNameZh"></h5>
+															<h6 class="text-muted" v-text="item.videoNameEn"></h6>
+														</div>
+
+													</div>
+												</a>
+											</div>
+										</div>
+
+										<div class="text-center my-3" >
+											<a class="btn btn-warning px-5" style="color: #fff;" href="./media">more</a>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+				</scetion>
+
+				<!-- <img src="assets/imgs/影音導覽網站_04影音導覽內頁.jpg" style="width: 100%;" /> -->
+			<% include include/footer %>
+		</div>
+	</body>
+</html>
+<% include include/scripts %>
+
+<script>
+  var app = null;
+
+  function initApp(){
+    app = new Vue({
+      el: '#app',
+      data: {
+				selectingVideo: '0',
+				videoLists:[
+					{
+						videoId: '1',
+						videoTypeId: 'sashimi',
+						videoPicUrl: './assets/imgs/vlist/vPic1.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif1.webp',
+						videoYoutubeId: 'PVdllTnVs8A',
+						videoNameZh: '日本料理 巨大九繪魚',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '2',
+						videoTypeId: 'sashimi',
+						videoPicUrl: './assets/imgs/vlist/vPic2.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif2.webp',
+						videoYoutubeId: 'ZNTx2gJe3c0',
+						videoNameZh: '生魚片吃多了也會怕',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '3',
+						videoTypeId: 'sushi',
+						videoPicUrl: './assets/imgs/vlist/vPic4.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif4.webp',
+						videoYoutubeId: 'XS5-iXHO0zc',
+						videoNameZh: '只剩爭鮮',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '4',
+						videoTypeId: 'sushi',
+						videoPicUrl: './assets/imgs/vlist/vPic5.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif5.webp',
+						videoYoutubeId: '4K-n13B9bc8',
+						videoNameZh: 'くら寿司又排不到',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '5',
+						videoTypeId: 'gameshow',
+						videoPicUrl: './assets/imgs/vlist/vPic6.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif6.webp',
+						videoYoutubeId: '4J524wWLGNU',
+						videoNameZh: 'PS4還是沒有超想玩的作品',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '6',
+						videoTypeId: 'gameshow',
+						videoPicUrl: './assets/imgs/vlist/vPic7.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif7.webp',
+						videoYoutubeId: 'aqHQJ5t0OfU',
+						videoNameZh: 'KH劇情好亂',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '7',
+						videoTypeId: 'gameshow',
+						videoPicUrl: './assets/imgs/vlist/vPic8.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif8.webp',
+						videoYoutubeId: 'f1XdyC-XUto',
+						videoNameZh: '該預購Pokemon Let\'s Go了',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '8',
+						videoTypeId: 'nintendo',
+						videoPicUrl: './assets/imgs/vlist/vPic9.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif9.webp',
+						videoYoutubeId: 'vAXicfW9oO8',
+						videoNameZh: 'しずく参戦!',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '9',
+						videoTypeId: 'nintendo',
+						videoPicUrl: './assets/imgs/vlist/vPic10.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif10.webp',
+						videoYoutubeId: 'aecJIJ5tiMY',
+						videoNameZh: '懷舊馬力歐好玩',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '10',
+						videoTypeId: 'nintendo',
+						videoPicUrl: './assets/imgs/vlist/vPic11.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif11.webp',
+						videoYoutubeId: 'qVr-BHLDyQw',
+						videoNameZh: '線上服務要收費囉',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '11',
+						videoTypeId: 'japantravel',
+						videoPicUrl: './assets/imgs/vlist/vPic12.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif12.webp',
+						videoYoutubeId: 'AaDptEPJ96Q',
+						videoNameZh: '來去日本穿和服',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '12',
+						videoTypeId: 'japantravel',
+						videoPicUrl: './assets/imgs/vlist/vPic13.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif13.webp',
+						videoYoutubeId: 'WUmy4rgtQPc',
+						videoNameZh: '東京自由行',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '13',
+						videoTypeId: 'song',
+						videoPicUrl: './assets/imgs/vlist/vPic14.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif14.webp',
+						videoYoutubeId: 'pYk8Tk_qr40',
+						videoNameZh: '夏祭り',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '14',
+						videoTypeId: 'song',
+						videoPicUrl: './assets/imgs/vlist/vPic15.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif15.webp',
+						videoYoutubeId: 'ue6FWV_jfQI',
+						videoNameZh: 'リンダリンダ',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '15',
+						videoTypeId: 'ramen',
+						videoPicUrl: './assets/imgs/vlist/vPic3.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif3.webp',
+						videoYoutubeId: 'fuVPwdHDw2s',
+						videoNameZh: '橫濱的拉麵與台灣的拉麵',
+						videoNameEn: 'no English Title',
+					},{
+						videoId: '16',
+						videoTypeId: 'writes',
+						videoPicUrl: './assets/imgs/vlist/vPic16.jpg',
+						videoGifUrl: './assets/imgs/vlist/vGif16.webp',
+						videoYoutubeId: 'G0E9nrcVTuk',
+						videoNameZh: '已經過去一年了阿',
+						videoNameEn: 'no English Title',
+					},
+				],
+      },
+      watch: {
+
+      },
+      updated: function(){
+
+      },
+      computed: {
+				selectingVideoObj: function(){
+					for(let i in this.videoLists){
+						if(this.videoLists[i].videoId == this.selectingVideo){
+							return this.videoLists[i];
+						}
+					}
+					return null;
+				},
+				otherVideoList: function(){
+					return this.videoLists.slice(0, 6);
+				},
+      },
+      methods: {
+				preVideo: function(){
+					let i = parseInt(this.selectingVideo)-1;
+					this.moveIfHasVideo(i);
+				},
+				nextVideo: function(){
+					let i = parseInt(this.selectingVideo)+1;
+					this.moveIfHasVideo(i);
+				},
+				moveIfHasVideo: function(p){
+					if(p >= 1 && p<= this.videoLists.length){
+						window.location = "./mediaContent?id="+p;
+					}
+				},
+      }
+    });
+  }
+
+  $(document).ready(function(){
+		initApp();
+		setNavActive('nav-media');
+		let id = getParameterByName('id');
+		app.selectingVideo = id;
+  });
+</script>

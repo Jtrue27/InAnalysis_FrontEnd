@@ -1,0 +1,382 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>實驗台</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <style>
+      .introDiv{
+        padding: 3em;
+        border: solid 2px #444;
+        border-radius: 1em;
+        margin: 1em 0;
+        background-color: #ddd;
+      }
+
+      .introContent{
+      }
+
+      .introTrans{
+        margin: .5em;
+        padding: .5em;
+        border: solid 1px #fff;
+        border-radius: 1em;
+      }
+    </style>
+	</head>
+	<body>
+    <div class="container">
+      <section id="app" class="my-5">
+        <h1 class="text-center">Text to Speech</h1>
+        <h2 class="mb-3">Please input sentences:</h2>
+        <select class="form-control my-3" v-model="inputLang">
+          <option v-for="(lang,index) in langList" v-bind:value="lang.value">{{lang.label}}</option>
+        </select>
+        <textArea placeholder="Input something here" class="form-control" row="5" v-model="inputText"></textarea>
+        <div id="audioOutputs" class="my-2">
+        </div>
+        <div class="text-center">
+          <input type="button" v-bind:disabled="(inputText==''||ajaxing)" class="btn btn-success btn-block d-md-inline-block mt-3" v-on:click="trans" v-bind:value="submitText" />
+        </div>
+      </section>
+
+      <section id="autoTransApp" class="my-5">
+        <h1 class="text-center">Auto Translate</h1>
+        <div v-show="guide_spots.length==0">
+          <h2 class="mb-3">Please input guide ID:</h2>
+          <input type="text" class="form-control" v-model="guide_id"/>
+          <div class="text-center">
+            <input type="button" v-bind:disabled="ajaxing" class="btn btn-success btn-block d-md-inline-block mt-3" v-on:click="getGuideSpotData" value="Get Spots" />
+          </div>
+        </div>
+        <div id="spots" v-show="guide_spots.length>0">
+          <select class="form-control my-3" v-model="transLang" v-bind:disabled="ajaxing">
+            <option v-for="(lang,index) in langList" v-bind:value="index">{{lang.label}}</option>
+          </select>
+          <div class="text-center">
+            <input type="button" v-bind:disabled="ajaxing" class="btn btn-primary btn-block d-md-inline-block mt-3" v-on:click="startBatch" value="Translate" />
+          </div>
+
+          <div v-for="(spotObj, index) in guide_spots" v-bind:id="'spot'+index" class="introDiv">
+            <div class="introTitle">{{spotObj.title}}</div>
+            <div class="introContent">{{spotObj.intro}}</div>
+            <div class="introTrans" v-show="spotObj.transRes">
+              {{spotObj.transRes}}
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+
+	</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+  var app = null;
+  var autoTransApp = null;
+
+
+  function initTextToSpeechApp(){
+		app = new Vue({
+			el: '#app',
+			data: {
+        ajaxing: false,
+        inputText: '',
+        langList: [{
+          value: 'en6',
+          label: 'Language: English-A'
+        }, {
+          value: 'en5',
+          label: 'Language: English-B'
+        }, {
+          value: 'en4',
+          label: 'Language: English-C'
+        }, {
+          value: 'en3',
+          label: 'Language: English-D'
+        }, {
+          value: 'en2',
+          label: 'Language: English-E'
+        }, {
+          value: 'en1',
+          label: 'Language: English-F'
+        }, {
+          value: 'jp',
+          label: '語言: 日本語'
+        }, {
+          value: 'kr',
+          label: '語言: 韓文(不會打韓文啦乾)'
+        }],
+        inputLang: 'en1',
+        mp3Src: './1528357127344.mp3'
+      },
+			watch: {
+
+			},
+			updated: function(){
+
+			},
+			computed: {
+        submitText: function(){
+          if(this.ajaxing){
+            return 'MP3 Generating...';
+          }else{
+            return 'To Speech!!';
+          }
+        }
+			},
+			methods: {
+        trans: function(){
+          const _this = this;
+          speechAPI({
+            text: _this.inputText,
+            lang: _this.inputLang
+          }, function(){
+            app.ajaxing = true;
+            $('#audioOutputs *').remove();
+          }, function(){
+            app.ajaxing = false;
+          }, function(d){
+            $('#audioOutputs').append('<audio controls><source src="./'+d.mp3+'" type="audio/mpeg"></audio>');
+            $('audio')[0].play();
+          });
+
+
+        },
+			}
+		});
+	}
+
+  function initAutoTransApp(){
+		autoTransApp = new Vue({
+			el: '#autoTransApp',
+			data: {
+        pop_sv: 'https://popworld.cc',
+        ajaxing: false,
+        guide_id: 0,
+        guide_spots: [],
+        langList: [{
+          value: 'en1',
+          label: 'Language: English(有點媚)',
+          src: 'zh_TW',
+          target: 'en'
+        }, {
+          value: 'en2',
+          label: 'Language: English',
+          src: 'zh_TW',
+          target: 'en'
+        }, {
+          value: 'jp',
+          label: '語言: 日本語',
+          src: 'zh_TW',
+          target: 'ja'
+        }, {
+          value: 'kr',
+          label: '語言: 韓文(不會打韓文啦乾)',
+          src: 'zh_TW',
+          target: 'ko'
+        }],
+        transLang: 0,
+      },
+			watch: {
+        guide_id: function(val){
+					let tmp = parseInt(val);
+					if(isNaN(tmp) || tmp<0){
+						this.guide_id = 0;
+					}else{
+						this.guide_id = tmp;
+					}
+				},
+			},
+			updated: function(){
+
+			},
+			computed: {
+        guideSpotApiUrl: function(){
+          return this.pop_sv + '/api/guide/'+this.guide_id+'/spots';
+        }
+			},
+			methods: {
+        getGuideSpotData: function(){
+          const _this = this;
+          $.ajax({
+            url: _this.guideSpotApiUrl,
+            method: 'GET',
+            contentType : 'application/json',
+            beforeSend: function(){
+              _this.ajaxing = true;
+              _this.guide_spots = [];
+            },
+            success: function(d){
+              //console.log(d);
+              _this.parseSpotJson(d);
+
+            },
+            error: function(e, e2, e3){
+
+            },
+            complete: function(){
+              _this.ajaxing = false;
+            }
+          });
+        },
+        parseSpotJson: function(data){
+          for(var i=0;i<data.length;i++){
+            const content = data[i];
+            let spotObj = {};
+            spotObj.title = content.spot_name;
+            spotObj.intro = content.spot_intro;
+            this.guide_spots.push(spotObj);
+          }
+        },
+        startBatch: function(){
+          $('#spots audio').remove();
+          this.ajaxing = true;
+          this.getTranslatedTextAll(0);
+        },
+        endBatch: function(){
+          this.ajaxing = false;
+        },
+        getTranslatedTextAll: function(nowIndex){
+          //console.log(nowIndex);
+          const _this = this;
+          if(nowIndex >= _this.guide_spots.length){
+            _this.getTransVoicesAll(0);
+            return;
+          }
+          const text = _this.guide_spots[nowIndex].intro;
+          const langSet = _this.langList[_this.transLang];
+          transAPI({
+            text,
+            src: langSet.src,
+            target: langSet.target
+          }, function(){
+          }, function(){
+          }, function(d){
+            try{
+              //var data = JSON.parse(d);
+              var data = d;
+
+              if(data.data.translations[0]){
+
+                Vue.set(autoTransApp.guide_spots[nowIndex], 'transRes', data.data.translations[0].translatedText);
+              }
+              //console.log(data);
+              _this.getTranslatedTextAll(nowIndex+1);
+            }catch(e){
+              alert(e);
+              _this.endBatch();
+            }
+
+          }, function(e){
+            console.log(e);
+            alert(e);
+            _this.endBatch();
+          });
+        },
+
+        getTransVoicesAll: function(nowIndex){
+          const _this = this;
+          if(nowIndex >= _this.guide_spots.length){
+            _this.endBatch();
+            return;
+          }
+          const text = _this.guide_spots[nowIndex].transRes;
+          const langSet = _this.langList[_this.transLang];
+          speechAPI({
+            text: text,
+            lang: langSet.value,
+          }, function(){
+          }, function(){
+          }, function(d){
+            $('#spot'+nowIndex).append('<audio controls><source src="./'+d.mp3+'" type="audio/mpeg"></audio>');
+            //$('audio')[0].play();
+            _this.getTransVoicesAll(nowIndex+1);
+          }, function(e){
+            console.log(e);
+            alert(e);
+            _this.endBatch();
+          });
+        }
+			}
+		});
+	}
+
+  function transAPI(data, beforeAction, afterAction, callback, error){
+    $.ajax({
+      url: '<%=webAttrs.webroot%>/popworld/translate',
+      data: JSON.stringify(data),
+      method: 'POST',
+      contentType : 'application/json',
+      beforeSend: function(){
+        if(beforeAction!=null){
+          beforeAction();
+        }
+      },
+      success: function(d){
+        if(callback!=null){
+          callback(d);
+        }
+      },
+      error: function(e, e2, e3){
+        if(error!=null){
+          error(e);
+        }
+      },
+      complete: function(){
+        if(afterAction!=null){
+          afterAction();
+        }
+      }
+    });
+  }
+
+  function speechAPI(data, beforeAction, afterAction, callback, error){
+    $.ajax({
+      url: '<%=webAttrs.webroot%>/popworld/speech',
+      data: JSON.stringify(data),
+      method: 'POST',
+      contentType : 'application/json',
+      beforeSend: function(){
+        if(beforeAction!=null){
+          beforeAction();
+        }
+      },
+      success: function(d){
+        if(callback!=null){
+          callback(d);
+        }
+      },
+      error: function(e, e2, e3){
+        if(error!=null){
+          error(e);
+        }
+      },
+      complete: function(){
+        if(afterAction!=null){
+          afterAction();
+        }
+      }
+    });
+  }
+
+  function initApp(){
+    initTextToSpeechApp();
+    initAutoTransApp();
+  }
+
+  $(document).ready(function(){
+    initApp();
+  });
+</script>

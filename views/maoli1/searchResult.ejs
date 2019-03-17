@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html id="top">
+	<head>
+    <% include include/meta %>
+		<% include include/css %>
+		<style>
+			.searchResult{
+				max-width: 550px;
+				margin: 0 auto;
+			}
+
+			.resultPanel{
+				padding: 2em;
+				font-size: 1.2em;
+				background-color: #fff;
+		    box-shadow: 0px 0px 10px #ddd;
+			}
+
+			.res-set{
+				display: flex;
+		    flex-direction: row;
+		    flex-wrap: wrap;
+				margin-bottom: 1em;
+			}
+
+			.res-title{
+				flex: 0 0 100px;
+				font-weight: 800;
+			}
+
+			.res-content{
+				flex: 1 1 100px;
+			}
+
+			.hint-tel{
+				text-align: center;
+		    font-size: 1.5em;
+		    color: #3e9bed;
+		    font-weight: 600;
+		    margin-top: 1em;
+			}
+
+			@media (min-width: 768px){
+				.searchResult{
+
+				}
+
+				.resultPanel{
+
+				}
+			}
+		</style>
+  </head>
+	<body>
+		<div id="app">
+			<% include include/nav %>
+			<section class="bg-mountain">
+				<img src="assets/imgs/back_mountain.png" class="bg-mountain-img" />
+				<div class="container pb-5">
+
+					<nav aria-label="breadcrumb">
+					  <ol class="breadcrumb">
+					    <li class="breadcrumb-item"><a href="./" class="breadcrumb-item-link">首頁</a></li>
+							<li class="breadcrumb-item"><a href="./" class="breadcrumb-item-link">導覽預約</a></li>
+					    <li class="breadcrumb-item active">預約查詢</li>
+					  </ol>
+					</nav>
+
+					<h2 class="section-title">預約查詢</h2>
+
+					<div class="searchResult">
+
+						<div class="resultPanel">
+
+							<div class="res-set">
+								<div class="res-title">
+									姓名
+								</div>
+								<div class="res-content">
+									黃妍熙
+								</div>
+							</div>
+
+							<div class="res-set">
+								<div class="res-title">
+									連絡電話
+								</div>
+								<div class="res-content">
+									09XX XXX XXX
+								</div>
+							</div>
+
+							<div class="res-set">
+								<div class="res-title">
+									電子信箱
+								</div>
+								<div class="res-content">
+									XXXXXX@gmail.com
+								</div>
+							</div>
+
+							<hr/>
+
+							<div class="res-set">
+								<div class="res-title">
+									預約日期
+								</div>
+								<div class="res-content">
+									2018-11-30 下午
+								</div>
+							</div>
+
+							<div class="res-set">
+								<div class="res-title">
+									預約人數
+								</div>
+								<div class="res-content">
+									5人
+								</div>
+							</div>
+
+							<div class="res-set">
+								<div class="res-title">
+									導覽語言
+								</div>
+								<div class="res-content">
+									中文
+								</div>
+							</div>
+
+							<hr/>
+
+							<div class="res-set">
+								<div class="res-title">
+									導覽費用
+								</div>
+								<div class="res-content font-weight-bold">
+									500 元
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row mt-5">
+
+							<div class="col-8">
+								<button class="btn btn-primary btn-lg btn-block">查詢其他預約</button>
+							</div>
+
+							<div class="col-4">
+								<button class="btn btn-secondary btn-lg btn-block">取消預約</button>
+							</div>
+
+						</div>
+
+						<div class="hint-tel">
+							預約問題請撥打 037-868146
+						</div>
+
+					</div>
+
+				</div>
+			</section>
+			<% include include/footer %>
+		</div>
+	</body>
+</html>
+<% include include/scripts %>
+
+<script>
+  var app = null;
+
+  function initApp(){
+    app = new Vue({
+      el: '#app',
+      data: {
+
+      },
+      watch: {
+
+      },
+      updated: function(){
+
+      },
+      computed: {
+
+      },
+      methods: {
+
+      }
+    });
+  }
+
+  $(document).ready(function(){
+		setNavActive('nav_yoyaku');
+		initApp();
+  });
+</script>

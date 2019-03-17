@@ -1,0 +1,26 @@
+
+
+.news-card{
+  display: block;
+  background-color: #fafafa;
+  padding: 20px 40px;
+  margin-bottom: 20px;
+}
+
+.news-card-title{
+  color: #000;
+  font-weight: 800;
+}
+
+.news-card-date{
+  color: #54a0c5;
+}
+
+.news-card-snipest{
+  margin-top: 10px;
+  color: #000;
+}
+
+.pagination {
+  justify-content: center;
+}

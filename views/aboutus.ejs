@@ -1,0 +1,1308 @@
+<!DOCTYPE HTML>
+<html id="top">
+	<head>
+    <title>Popworld</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<% include include/css %>
+    <link rel="stylesheet" href="./assets/css/pop_aboutus.css" />
+
+		<link rel="icon"
+      type="image/png"
+      href="./assets/imgs/web_title_icon.png">
+		<meta property="og:title" content="Popworld蹦世界"></meta>
+		<meta property="og:type" content="website"></meta>
+		<meta property="og:description" content="自助旅行，背包客，省錢必備手機導遊!"></meta>
+		<meta property="og:image" content="./assets/imgs/icon.jpg"></meta>
+
+    <script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-55647.js"></script>
+  </head>
+	<body>
+		<div id="app">
+      <% include include/nav %>
+      <div class="main-body">
+        <section class="about-us-banner">
+          <div>
+            <h1>關於我們</h1>
+          </div>
+        </section>
+
+
+
+        <section class="about-tag-btns">
+          <div class="container d-none d-md-block">
+            <ul>
+              <li v-on:click="nowTag = 'company'" v-bind:class="{'active': nowTag == 'company'}">
+                <i class="fas fa-2x fa-comment-dots"></i> <span>公司理念</span>
+              </li>
+              <li v-on:click="nowTag = 'responsity'" v-bind:class="{'active': nowTag == 'responsity'}">
+                <i class="fas fa-2x fa-clipboard-list"></i> <span>社會責任</span>
+              </li>
+              <li v-on:click="nowTag = 'member'" v-bind:class="{'active': nowTag == 'member'}">
+                <i class="fas fa-2x fa-users"></i> <span>團隊成員</span>
+              </li>
+              <li v-on:click="nowTag = 'service'" v-bind:class="{'active': nowTag == 'service'}">
+                <i class="fas fa-2x fa-hand-holding"></i> <span>提供服務</span>
+              </li>
+              <li v-on:click="nowTag = 'achievement'" v-bind:class="{'active': nowTag == 'achievement'}">
+                <i class="fas fa-2x fa-chart-bar"></i> <span>公司成果</span>
+              </li>
+              <li v-on:click="nowTag = 'contact'" v-bind:class="{'active': nowTag == 'contact'}">
+                <i class="far fa-2x fa-envelope"></i> <span>聯絡我們</span>
+              </li>
+              <li v-on:click="nowTag = 'recruit'" v-bind:class="{'active': nowTag == 'recruit'}">
+                <i class="fas fa-2x fa-user-plus"></i> <span>招兵買馬</span>
+              </li>
+            </ul>
+          </div>
+          <div class="container d-md-none">
+            <div class="text-center">
+              <h2 v-text="nowTagObject.showName"></h2>
+              <span style="color:#999">按著這邊切換</span>
+            </div>
+            <div class="touch-select" v-on:touchstart="onTouchStart" v-on:touchend="onTouchEnd" v-on:touchmove="onTouchMove">
+
+            </div>
+						<div class="selector-container" v-bind:class="{'active': selectorTouching}">
+							<div v-bind:class="{'active': selectingTag == 'company'}" class="selector-btn selector-btn-up">
+								<i class="fas fa-2x fa-comment-dots"></i>
+							</div>
+							<div v-bind:class="{'active': selectingTag == 'responsity'}" class="selector-btn selector-btn-up-right">
+								<i class="fas fa-2x fa-clipboard-list"></i>
+							</div>
+							<div v-bind:class="{'active': selectingTag == 'member'}" class="selector-btn selector-btn-right">
+								<i class="fas fa-2x fa-users"></i>
+							</div>
+							<div v-bind:class="{'active': selectingTag == 'service'}" class="selector-btn selector-btn-down-right">
+								<i class="fas fa-2x fa-hand-holding"></i>
+							</div>
+							<div v-bind:class="{'active': selectingTag == 'cancel'}" class="selector-btn selector-btn-down">
+								<i class="fas fa-2x fa-ban"></i>
+							</div>
+							<div v-bind:class="{'active': selectingTag == 'achievement'}" class="selector-btn selector-btn-down-left">
+								<i class="fas fa-2x fa-chart-bar"></i>
+							</div>
+							<div v-bind:class="{'active': selectingTag == 'contact'}" class="selector-btn selector-btn-left">
+								<i class="far fa-2x fa-envelope"></i>
+							</div>
+							<div v-bind:class="{'active': selectingTag == 'recruit'}" class="selector-btn selector-btn-up-left">
+								<i class="fas fa-2x fa-user-plus"></i>
+							</div>
+
+							<div class="selector-btn selector-btn-center">
+								<i class="fas fa-2x fa-location-arrow"></i>
+							</div>
+
+							<div class="selector-btn selector-btn-center-up">
+								<h3 class="text-center" v-text="selectingTagName"></h3>
+							</div>
+						</div>
+          </div>
+        </section>
+
+        <div class="container my-5">
+
+          <section v-show="nowTag == 'company'">
+            <h3 class="text-center mb-3">核心理念</h3>
+            <div style="margin:0 auto;max-width:600px;">
+              <p>
+                蹦世界致力於打造一個更有趣的世界，以人為核心，設計方便、簡單、改善人們生活的服務。<br/>
+                期待的目標是全世界到處都有蹦世界在服務每一個人。<br/>
+                想達到的願景是因為蹦世界而讓這世界更有趣。<br/>
+                <br/>
+                蹦世界的服務從人出發，為了改善或解決人們所遇到的問題，再開發出所需的服務。<br/>
+                蹦世界的使命，不做軟體代工、不做硬體代工，不做單純依照規格達到要求的工作。更注重的是創意，為人所設想的服務。<br/>
+                <br/>
+                蹦世界名稱的由來。希望讓每個人可以用雙腳踏在世界的每一個角落，用跳躍的愉快的心情。<br/>
+                另一個含意則是不管在世界的哪一個角落，我的手機螢幕總能蹦出令人驚艷的內容，豐富人生的旅程<br/>
+              </p>
+            </div>
+          </section>
+
+          <section v-show="nowTag == 'responsity'">
+            <div class="row">
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid" src="./assets/imgs/respon1.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="mb-2">聽見台灣計畫</h3>
+                <p>
+                  蹦世界做一件很花功夫大家不想去做的事情，就是在每一寸土地上埋進聲音，走到哪就像導遊介紹到哪。<br/>
+                  讓外國人在台灣這塊土地上不因為資訊或語言的限制只能走馬看花，深度的認識這塊土地。<br/>
+                  創造友善的服務，深度台灣就是這麼的輕鬆，讓遊客產生 WOW 的驚訝!台灣竟然有如此用心的服務!回國後還會想來，更推薦給朋友到台灣遊玩。
+                </p>
+              </div>
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid" src="./assets/imgs/respon2.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="mb-2">環保永續</h3>
+                <p>
+                  使用蹦世界手機導遊，不再需要厚重的紙本，減少飛機等交通工具的碳排放量，也不需要砍伐樹木，製成地圖與書籍。
+                </p>
+              </div>
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid" src="./assets/imgs/respon3.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="mb-2">增加工作機會</h3>
+                <p>
+                  人力導遊不因年老、行動不便、時間早晚或是遊客人數限制而無法提供服務。<br/>
+                  只要將豐富的經驗放上蹦世界，隨時隨地都可以帶著遊客遊玩，隨時都可以販賣導覽的經驗，增加導遊的收入。
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section v-show="nowTag == 'achievement'">
+						<div class="achievement-div">
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach1.jpg"/>
+									<span>孫運璿科技．人文紀念館—經濟歡樂送</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach2.jpg"/>
+									<span>梁實秋故居—被鎖的手稿</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach3.jpg"/>
+									<span>中華民國對外貿易發展協會</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach4.jpg"/>
+									<span>花蓮玩秀林</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach5.jpg"/>
+									<span>卯澳漁村社區</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach6.jpg"/>
+									<span>福壽山農場</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach7.jpg"/>
+									<span>發現臺灣─重訪臺灣博物學與博物學家的年代</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach8.jpg"/>
+									<span>2017台北國際旅展</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach9.jpg"/>
+									<span>中央氣象局</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach10.jpg"/>
+									<span>胡適紀念館</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach11.jpg"/>
+									<span>2017未來大人物 「待」溝嘉年華</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach12.jpg"/>
+									<span>綠色之夢—當代臺灣自然書寫特展(國立臺灣文學館)</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach13.jpg"/>
+									<span>描繪美國：美國文學行旅特展(國立臺灣文學館)</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach14.jpg"/>
+									<span>郵政博物館</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach15.jpg"/>
+									<span>國立科學工藝博物館</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach16.jpg"/>
+									<span>蘭嶼地區旅遊資訊</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach17.jpg"/>
+									<span>新北市立黃金博物館</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach18.jpg"/>
+									<span>第15屆桃源創作獎</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach19.jpg"/>
+									<span>陳澄波戶外美術館</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach20.jpg"/>
+									<span>哈佛健康事業</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach21.jpg"/>
+									<span>新北市立十三行博物館</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach22.jpg"/>
+									<span>深溝自來水園區現代館</span>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach23.jpg"/>
+									<span>虎頭山環境教育園區</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach24.jpg"/>
+									<span>台北偶戲館</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach25.jpg"/>
+									<span>【故居探訪-走入名人生活日常】3館合1電子套票</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach26.jpg"/>
+									<span>2016台北國際旅展 - 牽手去旅行（已結束）</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach27.jpg"/>
+									<span>藍晒圖文創園區</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach28.jpg"/>
+									<span>淡水古蹟博物館</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach29.jpg"/>
+									<span>2016 台灣美食展 - 純真食代</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach30.jpg"/>
+									<span>貓空趣漫遊</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach31.jpg"/>
+									<span>2016TTE 夏季最大旅展 台北國際觀光博覽會</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach32.jpg"/>
+									<span>國立臺灣文學館 純真童心——兒童文學資深作家與作品展</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach33.jpg"/>
+									<span>原住民文化園區</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach34.jpg"/>
+									<span>國立臺灣博物館</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach35.jpg"/>
+									<span>鶯歌陶瓷博物館</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach36.jpg"/>
+									<span>高醫校史暨南臺灣醫療史料館</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach37.jpg"/>
+									<span>2016台北寵物用品博覽會</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach38.jpg"/>
+									<span>松山車站集章換紅豆餅</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach39.jpg"/>
+									<span>宜蘭深溝水源生態園區</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach40.jpg"/>
+									<span>2015 ITF 台北國際旅展</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach41.jpg"/>
+									<span>浙江省蔣氏故居智慧導覽</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach42.jpg"/>
+									<span>婚禮AR合照</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach43.jpg"/>
+									<span>蹦遊華山</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+							<div class="achievement-unit">
+								<div class="achievement-unit-content">
+									<img src="./assets/imgs/ach44.jpg"/>
+									<span>魔政大冒險</span>
+									<div class="achievement-unit-bottom"></div>
+								</div>
+							</div>
+
+						</div>
+          </section>
+
+          <section v-show="nowTag == 'member'">
+            <div class="row">
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem1.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">創辦人 黃勝宏</h3>
+                <p>
+                  蹦世界的靈魂人物，在第一支Android手機還沒出現前就和Google合作。<br/>
+                  參與HTC第一款Android手機和平板電腦，是Android手機的先驅者。 <br/>
+                  工作其中有很多想法，為了改善人們生活的夢想，創辦了蹦世界數位創意，打造一個更有趣的世界!
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem2.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">藝術總監 吳軍逸</h3>
+                <p>
+                  蹦世界首席設計師，影像處理實驗室碩士，熱愛繪畫與設計，擅長2D美術繪圖，3D動畫小有研究。<br/>
+                  常莫名迸出無厘頭的想法，帶給蹦世界不少創意及發想。<br/>
+                  致力於創作最人性化的介面與最棒的遊戲風格設計，讓這世界充滿更多樂趣！
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem3.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">專利師 陶霖</h3>
+                <p>
+                  蹦世界的幽靈人物，有牌的專利師，各產業領域皆有專利服務實績。<br/>
+                  蹦世界初創期及滲入，不做第一線，也不做後台，只為蹦世界創立起堅實的智權堡壘。
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem4.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">業務經理 蘇嘉偉</h3>
+                <p>
+                  硬底子的全方位產品經理. 從研發歷練至業務, 從代工歷練至品牌; 將財務管理融進公司策略, 將流程最佳化落實於跨部門合作. 堅信透過實現有趣的想法, 會能帶來一個更有趣的世界.
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem5.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">研發經理 黃彥皓</h3>
+                <p>
+                  政大資管系學士，台大資管所碩士，在資訊領域有高度的專業與學習熱忱。<br/>
+                  在與蹦世界的專案合作中產生很大的興趣，畢業後加入公司一起為目標打拼，工作主要是負責網路後端與App開發。
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem6.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">研發工程師 王健驊</h3>
+                <p>
+                  政治大學資管系畢業，於在學期間與蹦世界進行專案合作，共同開拓定位服務與多媒體行銷等創新元素的種種可能性，在過程中激起對該類創新應用領域的興趣與期待，畢業後加入蹦世界任職Android軟體工程師。
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem7.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">軟體工程師 王佑鈞</h3>
+                <p>
+                  會寫程式但不是太專業<br/>
+                  會拉業務但不太愛講話<br/>
+                  會做規劃但管不太動人<br/>
+                  曾經創業但沒登記公司<br/>
+                  說好聽點是全方位<br/>
+                  講難聽些是半桶水<br/>
+                  熱愛所有出乎意料的知識與驚喜<br/>
+                  靠著熱情要在蹦世界走出一條沒人走過的路
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem8.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">專案企劃 蔡宜庭</h3>
+                <p>
+                  台北人。台大政治系。喜歡貓、喜歡吃半熟的蛋黃、喜歡算命、電影、旅行，喜歡變動且有挑戰的人生。<br/>
+                  目前人生的目標是多嘗試生命的各種可能性，希望有天能發自內心接納自己的各種樣貌。
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem9.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">專案企劃 黃虹筑</h3>
+                <p>
+                  暨大國際企業學系，到德國交換了半年，從此愛上一個人旅行，喜歡跟陌生人聊天，認識不同的文化，也推銷自己的國家。希望能讓全世界認識台灣，也讓全世界走進台灣。
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem10.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">專案企劃 王盈惠</h3>
+                <p>
+                  來自高雄 政大歐語系德文組暨經濟學系<br/>
+                  喜歡四處跑也喜歡安靜的看書看展覽<br/>
+                  看電影、旅行、吃美食是人生當中最幸福不過的事情
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem11.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">專案企劃 陳予蘋</h3>
+                <p>
+                  政大民族系雙主修數位學程，喜歡手搖杯、喜歡萌妹子、喜歡也正在學習享受生活，<br/>
+                  正努力朝著理想中的自己一步一步慢慢向前走，雖然是個路痴但很享受迷路的時光，<br/>
+                  希望能在蹦世界幫助更多人去認識台灣每個角落獨特的文化，<br/>
+                  也期許自己在工作的過程中更加認識與瞭解這個獨特的自己。
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem12.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">專案企劃 陳柏宏</h3>
+                <p>
+                  政大財政系<br/>
+                  影劇、攝影、出遊是厭世生活中的出口<br/>
+                  喜歡戲劇那些別於生活的意外<br/>
+                  喜歡拍照時快門捕捉到的光影<br/>
+                  喜歡結伴出遊時創造的瘋回憶<br/>
+                  在這些生活的片刻中，找自己
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem13.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">遊戲企劃 林柏聿</h3>
+                <p>
+                  輔大資管系<br/>
+                  喜歡電影，感受不同故事所帶來的感動<br/>
+                  享受旅行，體驗不同文化、國家、風景<br/>
+                  熱愛攝影，捕捉每個值得留戀的瞬間<br/>
+                  希望透過自己的一切<br/>
+                  將快樂散播給予每一個人
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem14.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">遊戲企劃 錢采夌</h3>
+                <p>
+                  國北教玩遊所<br/>
+                  喜歡遊戲，想要透過遊戲讓大家更認識世界<br/>
+                  身為一個追夢人，正在築夢的路前進。
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem15.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">執行編輯 周芷晴</h3>
+                <p>
+                  生於雲林，活於世界<br/>
+                  熱愛旅遊、烹飪、美食、電影、音樂、朋友，及於一切與生活有關的事物<br/>
+                  覺得旅行是跳脫日常框架，尋找生命更多選擇的路途<br/>
+                  正在教育、旅行、食農，與讓自己快樂的路上努力
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem16.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">執行編輯 許珈瑜</h3>
+                <p>
+                  天蠍座。<br/>
+                  喜歡看海，最喜歡七星潭搭配日出。<br/>
+                  喜歡體驗各國各地不一樣的文化，<br/>
+                  喜歡溫暖的事物。<br/>
+                  <br/>
+                  認為善良與勇敢是一種選擇，<br/>
+                  也是希望能一直堅持下去的生活態度。<br/>
+                  <br/>
+                  期望用心地做每一件事，過每一天，<br/>
+                  讓每一天都值得紀念。
+                </p>
+              </div>
+
+              <div class="col-12 col-md-4 col-lg-4 mb-4">
+                <img class="img-fluid rounded-circle" src="./assets/imgs/mem17.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-4 content-desc">
+                <h3 class="member-title mb-2">執行編輯 陳妍元</h3>
+                <p>
+                  台北人，目前就讀於政大經濟雙主修統計系。平常喜歡爬山、旅行和拍照，希望可以挖掘更多台灣的口袋景點，分享給更多人知道。
+                </p>
+              </div>
+
+            </div>
+          </section>
+
+          <section v-show="nowTag == 'service'">
+						<div class="row">
+
+							<div class="col-12 col-md-4 col-lg-4 mb-3">
+                <img class="img-fluid sv-img" src="./assets/imgs/sv1.jpg"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-5 content-desc">
+                <h3 class="sv-title mb-2">適地性服務(Location Based Service, LBS)</h3>
+                <p>
+                  提供各項戶外定位、室內定位的完整客製化服務，歡迎聯絡我們。
+                </p>
+              </div>
+
+							<div class="col-12 col-md-4 col-lg-4 mb-3">
+                <img class="img-fluid sv-img" src="./assets/imgs/sv2.jpg"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-5 content-desc">
+                <h3 class="sv-title mb-2">自製地圖導覽</h3>
+                <p>
+                  運用室內定位技術，旅客走到展覽品前手機就會自動出現語音與文字介紹。旅客不用拿著笨重、多人共用不衛生的導覽機。也不必到櫃台租借，只要用自己的手機就可以摟。<br/>
+									博物館、美術館不需要再購買或租借昂貴、笨重，且佔空間的導覽設備，也不需要人力負責出借與回收，輕鬆辦展解決導覽問題。
+                </p>
+              </div>
+
+							<div class="col-12 col-md-4 col-lg-4 mb-3">
+                <img class="img-fluid sv-img" src="./assets/imgs/sv3.jpg"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-5 content-desc">
+                <h3 class="sv-title mb-2">Google地圖導覽</h3>
+                <p>
+									景點就標示在地圖上，顯示導航路線，抵達景點時自動出現文字與語音說明。遊玩不再迷路，輕鬆了解當地文化特色。<br/>
+									此服務還能加入小遊戲，AR擴增實境等應用。適合遊樂園、休閒農場或各類型的戶外活動。
+                </p>
+              </div>
+
+							<div class="col-12 col-md-4 col-lg-4 mb-3">
+                <img class="img-fluid sv-img" src="./assets/imgs/sv4.jpg"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-5 content-desc">
+                <h3 class="sv-title mb-2">智慧展覽</h3>
+                <p>
+                  導引消費者攤位路線，到達攤位時介紹或提供優惠訊息。透過小遊戲如尋寶活動、猜謎活動等與消費者互動，提高購物樂趣。
+                </p>
+              </div>
+
+							<div class="col-12 col-md-4 col-lg-4 mb-3">
+                <img class="img-fluid sv-img" src="./assets/imgs/sv5.jpg"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-5 content-desc">
+                <h3 class="sv-title mb-2">手機支付</h3>
+                <p>
+                  提供第三方支付服務，消費者使用手機就能購買，輕鬆付費。
+                </p>
+              </div>
+
+							<div class="col-12 col-md-4 col-lg-4 mb-3">
+                <img class="img-fluid sv-img" src="./assets/imgs/sv6.jpg"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-5 content-desc">
+                <h3 class="sv-title mb-2">體驗行銷</h3>
+                <p>
+                  整個城市都是我的遊樂場，電影、活動舉辦。例如扮演福爾摩斯在西門町，用腳步搜尋可疑地點，解開謎題!
+                </p>
+              </div>
+
+							<div class="col-12 col-md-4 col-lg-4 mb-3">
+                <img class="img-fluid sv-img" src="./assets/imgs/sv7.jpg"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-5 content-desc">
+                <h3 class="sv-title mb-2">擴增實境</h3>
+                <p>
+                  舉起手機即可看見現場無法展示的影像，例如過往歷史場景。
+                </p>
+              </div>
+
+							<div class="col-12 col-md-4 col-lg-4 mb-3">
+                <img class="img-fluid sv-img" src="./assets/imgs/sv8.png"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-5 content-desc">
+                <h3 class="sv-title mb-2">小遊戲設計</h3>
+                <p>
+                  我們也提供小遊戲的設計開發，能為您設計多樣遊戲加強您與使用者的互動連結。
+                </p>
+              </div>
+
+							<div class="col-12 col-md-4 col-lg-4 mb-3">
+                <img class="img-fluid sv-img" src="./assets/imgs/sv9.jpg"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-5 content-desc">
+                <h3 class="sv-title mb-2">大數據分析(Big Data)</h3>
+                <p>
+                  透過消費者行為的分析，讓您更加了解消費者。
+                </p>
+              </div>
+
+							<div class="col-12 col-md-4 col-lg-4 mb-3">
+                <img class="img-fluid sv-img" src="./assets/imgs/sv10.jpg"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-8 mb-5 content-desc">
+                <h3 class="sv-title mb-2">輔助戶外教學</h3>
+                <p>
+                  輔助老師教學，當天無法看到的生物或植物，可以以圖片或影片呈現，讓學習更有畫面，小孩子更容易吸收 促進孩童思考，利用小遊戲在玩樂中學習增進親子互動。
+                </p>
+              </div>
+
+						</div>
+          </section>
+
+          <section v-show="nowTag == 'contact'">
+            <div class="row">
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+							    <label for="inputName">姓名</label>
+							    <input type="text" class="form-control" id="inputName">
+							  </div>
+							</div>
+
+							<div class="col-12 col-md-6">
+								<div class="form-group">
+							    <label for="inputEmail">信箱(回覆使用)</label>
+							    <input type="email" class="form-control" id="inputEmail">
+							  </div>
+							</div>
+
+							<div class="col-12">
+								<div class="form-group">
+							    <label for="inputTitle">標題</label>
+							    <input type="text" class="form-control" id="inputTitle">
+							  </div>
+							</div>
+
+							<div class="col-12">
+								<div class="form-group">
+							    <label for="inputContent">內容</label>
+									<textarea class="form-control" rows="5" id="inputContent" placeholder="可以在這裡填寫對我們的建議/意見，我們會盡速為您處理！"></textarea>
+							  </div>
+							</div>
+
+							<div class="col-12 text-center">
+								<button class="btn btn-primary">送出</button>
+							</div>
+
+						</div>
+          </section>
+
+          <section v-show="nowTag == 'recruit'">
+
+            <div class="recruit-unit" id="rec1" cous="closed">
+
+							<div class="recruit-up">
+
+								<div class="recruit-title-img">
+									<img class="img-fluid" src="./assets/imgs/rec3_long.jpg" />
+								</div>
+
+								<div class="recruit-status">
+									招收人數：0人
+									<a class="open-btn" onclick="toggleRecruit('rec1')"><i class="fas fa-chevron-circle-down"></i></a>
+									<a class="close-btn" style="display: none;" onclick="toggleRecruit('rec1')"><i class="fas fa-chevron-circle-up"></i></a>
+								</div>
+
+							</div>
+
+							<div class="recruit-desc" style="display: none;">
+								<div class="recruit-desc-part1">
+									<p>這份工作是為了培養專案經理而設，會學到專案管理的能力，如與主管的溝通、公司資源分配、客戶管理、團隊合作。</p>
+									<p>需要細心處理事務、有效率的做事。不怕從小事做起，做的事情會多，但學到的東西也多，需要具備較高的抗壓性。但因為是小公司，所以才有機會能夠碰到較多人、事、物，對於經驗的培養相對較快。</p>
+								</div>
+								<div class="recruit-desc-part1-5">
+									<h3>條件</h3>
+									<p>大三升大四、大四、碩班或課業較少的學生</p>
+								</div>
+								<div class="recruit-desc-part2">
+									<h3>主要工作內容</h3>
+									<ol>
+										<li>幫蹦世界的客戶提出有創意的企劃，能夠為客戶量身著想並且能夠幫助客戶成長並達到目標</li>
+										<li>製作PPT與Word，能夠將外部提案表達出來，並形成內部執行流程與開發文件。</li>
+										<li>需要處理公部門標案等文件，需能撰寫大量文字。</li>
+										<li>尋找蹦世界目標客戶並提案，與客戶聯繫。到客戶處簡報以及處理客戶問題，地點遍及全台，以及延伸到海外。</li>
+										<li>與團隊合作將專案完成，培養專案經理的能力。</li>
+										<li>支援並分擔團隊工作。</li>
+									</ol>
+								</div>
+								<div class="recruit-desc-part3">
+									<h3>具備能力</h3>
+									<ol>
+										<li>有創造與思考能力，能夠站在使用者位置思考使用情境。</li>
+										<li>具有管理能力，參與社團擔任幹部或是有豐富活動籌劃經驗。</li>
+										<li>良好文字能力，可應付公部門的文件工作。</li>
+										<li>具有製作PPT能力，PPT需邏輯清晰有條理，對外給客戶，對內給團隊執行。有設計能力，懂繪圖工具為佳。</li>
+										<li>具有客戶管理能力，新客戶開發以及舊客戶維護。</li>
+										<li>有交通移動能力，需前往處理客戶事宜，有交通工具為佳。</li>
+									</ol>
+								</div>
+								<div class="recruit-desc-part4">
+									<h3>所需特質</h3>
+									<ul>
+										<li>負責任</li>
+										<li>抗壓性高</li>
+										<li>有熱情</li>
+										<li>有創意</li>
+										<li>活潑外向</li>
+										<li>表達能力良好</li>
+										<li>喜歡與人互動</li>
+										<li>能站在使用者角度思考服務</li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="recruit-unit" id="rec2" cous="closed">
+
+							<div class="recruit-up">
+
+								<div class="recruit-title-img">
+									<img class="img-fluid" src="./assets/imgs/rec2_long.jpg" />
+								</div>
+
+								<div class="recruit-status">
+									招收人數：0人
+									<a class="open-btn" onclick="toggleRecruit('rec2')"><i class="fas fa-chevron-circle-down"></i></a>
+									<a class="close-btn" style="display: none;" onclick="toggleRecruit('rec2')"><i class="fas fa-chevron-circle-up"></i></a>
+								</div>
+
+							</div>
+
+							<div class="recruit-desc" style="display: none;">
+								<div class="recruit-desc-part1">
+									<p>這個職務期許自己能成為主編輯，對自己所編輯出來的東西有熱情，渴望讓人喜歡，渴望讓越多人知道，渴望讓越多人使用。</p>
+									<p>
+										以下管道是在編輯閒暇之餘，可以用來宣傳:<br/>
+										1. 經營FB粉絲頁與遊客交流，所編輯的手機導遊讓更多人看到。<br/>
+										2. 於各大旅遊網站與遊客交流，告知遊客想去玩的地方已經有了手機導遊。<br/>
+										3. 與網友互動，將網友想去玩的景點編輯成手機導覽。
+									</p>
+								</div>
+								<div class="recruit-desc-part1-5">
+									<h3>條件</h3>
+									<p>大三升大四、大四、碩班或課業較少的學生</p>
+								</div>
+								<div class="recruit-desc-part2">
+									<h3>主要工作內容</h3>
+									<ol>
+										<li>編輯導覽成手機導遊。將全台的旅遊資訊，用第一人稱，像導遊帶著遊客一樣的介紹，編輯成有趣，又不失了解當地特色的文字。</li>
+										<li>幫蹦世界的客戶建立並設置戶外和室內導覽。戶外導覽需到現場量抓取GPS座標，室內導覽需到現場安裝Beacon。</li>
+										<li>維護蹦世界客戶的導覽。</li>
+										<li>支援並分擔團隊工作。</li>
+									</ol>
+								</div>
+								<div class="recruit-desc-part3">
+									<h3>具備能力</h3>
+									<ol>
+										<li>有豐富旅遊經歷，能夠了解遊客在旅遊所遇到的狀況，了解遊客的想法，能規劃出路線合理、時間規劃完善，介紹景點好玩的行程。</li>
+										<li>風趣的文字介紹能力，能用說故事的方式帶進當地的介紹。</li>
+										<li>有移動能力，具備交通工具者佳，或是懂得利用大眾交通工具。</li>
+									</ol>
+								</div>
+								<div class="recruit-desc-part4">
+									<h3>所需特質</h3>
+									<ul>
+										<li>負責任</li>
+										<li>抗壓性高</li>
+										<li>有熱情</li>
+										<li>有創意</li>
+										<li>活潑外向</li>
+										<li>表達能力良好</li>
+										<li>喜歡與人互動</li>
+										<li>能站在使用者角度思考服務</li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="recruit-unit" id="rec3" cous="closed">
+
+							<div class="recruit-up">
+
+								<div class="recruit-title-img">
+									<img class="img-fluid" src="./assets/imgs/rec1_long.jpg" />
+								</div>
+
+								<div class="recruit-status">
+									招收人數：0人
+									<a class="open-btn" onclick="toggleRecruit('rec3')"><i class="fas fa-chevron-circle-down"></i></a>
+									<a class="close-btn" style="display: none;" onclick="toggleRecruit('rec3')"><i class="fas fa-chevron-circle-up"></i></a>
+								</div>
+
+							</div>
+
+							<div class="recruit-desc" style="display: none;">
+								<div class="recruit-desc-part1">
+									<p>此職位是為了培養一個能獨當一面的設計師，會學習到如何設計網頁與APP的使用者介面、使用者體驗，還有廣告文宣的製作與印刷。所設計出的創作可以讓全台灣甚至國外的使用者看到，可以驕傲的跟家人跟朋友說這是我設計的!</p>
+								</div>
+								<div class="recruit-desc-part1-5">
+									<h3>條件</h3>
+									<p>
+										美術設計相關科系<br/>
+										大三升大四、大四、碩班或課業較少的學生
+									</p>
+								</div>
+								<div class="recruit-desc-part2">
+									<h3>主要工作內容</h3>
+									<ol>
+										<li>網頁設計。</li>
+										<li>可愛或實用圖示，可應用在APP或網頁上。</li>
+										<li>DM等廣告文宣。</li>
+										<li>協助設計師。</li>
+									</ol>
+								</div>
+								<div class="recruit-desc-part3">
+									<h3>具備能力</h3>
+									<ol>
+										<li>熟悉Photoshop、Illustrator等繪圖軟體。</li>
+									</ol>
+									<h3>加分能力</h3>
+									<ol>
+										<li>有設計的經驗與作品</li>
+									</ol>
+								</div>
+								<div class="recruit-desc-part4">
+									<h3>所需特質</h3>
+									<ul>
+										<li>負責任</li>
+										<li>抗壓性高</li>
+										<li>有熱情</li>
+										<li>有創意</li>
+										<li>活潑外向</li>
+										<li>表達能力良好</li>
+										<li>喜歡與人互動</li>
+										<li>能站在使用者角度思考服務</li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row recruit-bottom-desc">
+
+							<div class="col-12 col-md-6 col-lg-3 recruit-bottom-section text-center">
+								<h2><i class="far fa-2x fa-clock"></i></h2>
+								<h3>工作時間</h3>
+								<p>
+									一周至少三天。<br/>
+									每天8小時。<br/>
+									能實習一年為佳。<br/>
+									即可上班者為佳。
+								</p>
+							</div>
+
+							<div class="col-12 col-md-6 col-lg-3 recruit-bottom-section text-center">
+								<h2><i class="fas fa-2x fa-map-marker-alt"></i></h2>
+								<h3>工作地點</h3>
+								<p>
+									在辦公室或外出。
+								</p>
+							</div>
+
+							<div class="col-12 col-md-6 col-lg-3 recruit-bottom-section text-center">
+								<h2><i class="fas fa-2x fa-dollar-sign"></i></h2>
+								<h3>薪資</h3>
+								<p>
+									不需面議浪費時間，150 NTD/小時<br/>
+									做多少算多少，視績效調薪<br/>
+									(沒聽錯，實習生也會調薪)<br/>
+									勞保
+								</p>
+							</div>
+
+							<div class="col-12 col-md-6 col-lg-3 recruit-bottom-section text-center">
+								<h2><i class="fas fa-2x fa-gift"></i></h2>
+								<h3>福利</h3>
+								<p>
+									出差趴趴走不用錢<br/>
+									跟著老闆吃飯不用錢<br/>
+									公司零食飲料不用錢<br/>
+									PS4+VR<br/>
+									不定時的吃喝玩樂活動(唱歌、看電影等)<br/>
+									尾牙、抽獎<br/>
+									額外的保險
+								</p>
+							</div>
+
+							<div class="col-12 recruit-bottom-section text-center">
+								<h3>聯絡方式</h3>
+								<h6>有興趣者請附上履歷、作品與工作規劃寄到</h6>
+								<h6><a href="mailto:popworldnow@gmail.com">popworldnow@gmail.com</a></h6>
+							</div>
+
+							<div class="col-12 recruit-bottom-section">
+								<h3>備註</h3>
+								<p>
+									我們是小公司，需要的是有熱情的夥伴，每個人都有很大的發揮空間，不怕你做，只怕沒想法該怎麼做。<br/>
+									我們需要想成長、具有思考能力、懂得團隊合作、向上提升的人。<br/>
+									沒耐性、抗壓性低、責任感低，單純打工賺錢的人請不要投履歷。
+								</p>
+								<p>
+									蹦世界是在校的時候所創辦，團隊成員都很年輕。我們將每一位實習生當成是公司重要的人才，直接面對社會磨練，畢業後有機會升正職。<br/>
+									創辦人白手起家，也曾當過窮學生，對自己許下承諾，不成為最低薪資的元兇，公司正職沒有2開頭的薪資。
+								</p>
+							</div>
+
+						</div>
+
+          </section>
+
+        </div>
+
+
+
+      </div>
+
+			<% include include/footer %>
+		</div>
+	</body>
+</html>
+<% include include/scripts %>
+
+<script>
+  var app = null;
+
+  function initApp(initTag){
+    app = new Vue({
+      el: '#app',
+      data: {
+        nowTag: initTag,
+        selectorTouching: false,
+        selectAngle: -90,
+        selections: [
+          {
+            id: 'company',
+            showName: '公司理念',
+          },{
+            id: 'responsity',
+            showName: '社會責任',
+          },{
+            id: 'member',
+            showName: '團隊成員',
+          },{
+            id: 'service',
+            showName: '提供服務',
+          },{
+            id: 'achievement',
+            showName: '公司成果',
+          },{
+            id: 'contact',
+            showName: '聯絡我們',
+          },{
+            id: 'recruit',
+            showName: '招兵買馬',
+          },{
+            id: 'cancel',
+            showName: '取消選擇',
+          },
+        ],
+      },
+      watch: {
+				nowTag: function(val){
+					let realTag = this.selections[0].id;
+					for(let key in this.selections){
+						if(this.selections[key].id == val){
+							realTag = val;
+							break;
+						}
+					}
+					this.nowTag = realTag;
+					window.location.hash = '#'+this.nowTag;
+				},
+      },
+      updated: function(){
+
+      },
+      computed: {
+        selectingTag: function(){
+          if(this.selectAngle > 247.5 || this.selectAngle < -67.5){
+            return 'company';
+          }else if(this.selectAngle < -22.5){
+            return 'responsity';
+          }else if(this.selectAngle < 22.5){
+            return 'member';
+          }else if(this.selectAngle < 67.5){
+            return 'service';
+          }else if(this.selectAngle < 112.5){
+            return 'cancel';
+          }else if(this.selectAngle < 157.5){
+            return 'achievement';
+          }else if(this.selectAngle < 202.5){
+            return 'contact';
+          }else if(this.selectAngle < 247.5){
+            return 'recruit';
+          }
+          return '';
+        },
+        selectingTagName: function(){
+          for(var s in this.selections){
+            const sel = this.selections[s];
+            if(sel.id == this.selectingTag){
+              return sel.showName;
+            }
+          }
+          return '';
+        },
+        nowTagObject: function(){
+          for(var s in this.selections){
+            const sel = this.selections[s];
+            if(sel.id == this.nowTag){
+              return sel;
+            }
+          }
+          return {};
+        },
+      },
+      methods: {
+        onTouchStart: function(event){
+          event.preventDefault();
+          this.selectorTouching = true;
+        },
+        onTouchEnd: function(event){
+          event.preventDefault();
+          this.selectorTouching = false;
+          if(this.selectingTag != 'cancel'){
+            this.nowTag = this.selectingTag;
+          }
+        },
+        onTouchMove: function(event){
+          event.preventDefault();
+          var w = window.screen.width;
+          var h = window.screen.height;
+          var touchPoint = event.touches[0];
+
+          var x_d = touchPoint.clientX - w/2;
+          var y_d = touchPoint.clientY - h/2;
+          var deg = Math.atan(y_d / x_d) / Math.PI * 180;
+          if(x_d < 0){
+            deg = 180+deg;
+          }
+          this.selectAngle = deg;
+          deg += 45;
+          $('.selector-btn-center').css('transform', 'translate(-50%, -50%) rotate('+deg+'deg)');
+        },
+      }
+    });
+  }
+
+	function toggleRecruit(id){
+		var $outerDiv = $("#"+id);
+		if($outerDiv.attr('cous') == 'opened'){
+			$outerDiv.attr('cous', 'working');
+			$outerDiv.find('.open-btn').show();
+			$outerDiv.find('.close-btn').hide();
+			$outerDiv.find('.recruit-desc').slideUp(500, function(){
+				$outerDiv.attr('cous', 'closed');
+			});
+		}else if($outerDiv.attr('cous') == 'closed'){
+			$outerDiv.attr('cous', 'working');
+			$outerDiv.find('.close-btn').show();
+			$outerDiv.find('.open-btn').hide();
+			$outerDiv.find('.recruit-desc').slideDown(500, function(){
+				$outerDiv.attr('cous', 'opened');
+			});
+		}else if($outerDiv.attr('cous') == 'working'){
+		}
+	}
+
+  $(document).ready(function(){
+		var initTag = 'company';
+		if(window.location.hash.length > 0){
+			initTag = window.location.hash.substr(1);
+		}
+		initApp(initTag);
+
+  });
+</script>

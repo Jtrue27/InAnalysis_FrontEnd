@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html id="top">
+	<head>
+		<% include include/meta %>
+		<% include include/css %>
+		<link rel="stylesheet" href="assets/css/news.css" />
+  </head>
+	<body>
+		<div id="app">
+			<% include include/nav %>
+
+				<section class="page-banner">
+					<img class="page-banner-bg" src="./assets/imgs/banner-pic-news.jpg" />
+					<h2 class="page-banner-title">最新消息</h2>
+				</section>
+
+				<section>
+					<div class="container py-4">
+
+						<nav aria-label="breadcrumb">
+						  <ol class="breadcrumb">
+						    <li class="breadcrumb-item"><a href="./">首頁</a></li>
+						    <li class="breadcrumb-item"><a href="./news">最新消息</a></li>
+						  </ol>
+						</nav>
+
+						<div class="main-content">
+
+							<div class="row">
+								<div class="col-12" v-for="(item, index) in nowNews">
+									<a :href="'./newsContent?id='+item.id" class="news-card" :class="{'invisible': item.fake}">
+										<h3 class="news-card-title" v-text="item.title"></h3>
+										<h6 class="news-card-date" v-text="item.date"></h6>
+										<p class="news-card-snipest" v-text="item.snipest"></p>
+									</a>
+								</div>
+							</div>
+
+							<div class="paging-nav">
+								<div class="paging-btn" @click="pageChange(1)" ><i class="fas fa-angle-double-left"></i></div>
+								<div class="paging-btn" @click="pageChange(nowPage-1)" ><i class="fas fa-chevron-left"></i></div>
+								<div class="paging-btn paging-btn-border" @click="pageChange(item)" v-for="(item, index) in pagingArray" :class="{'actived': item == nowPage}" v-text="item"></div>
+								<div class="paging-btn" @click="pageChange(nowPage+1)" ><i class="fas fa-chevron-right"></i></div>
+								<div class="paging-btn" @click="pageChange(pageAmount)" ><i class="fas fa-angle-double-right"></i></div>
+							</div>
+
+						</div>
+
+					</div>
+				</scetion>
+
+				<!-- <img src="assets/imgs/影音導覽網站_02最新消息.jpg" style="width: 100%;" /> -->
+			<% include include/footer %>
+		</div>
+	</body>
+</html>
+<% include include/scripts %>
+
+<script>
+  var app = null;
+
+	function initApp(){
+    app = new Vue({
+      el: '#app',
+      data: {
+				news: [
+					{
+						date: '2018/03/24',
+						title: '導覽人力資料更新',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						id: '123',
+					},{
+						date: '2018/03/20',
+						title: '資料庫維護通知',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						id: '123',
+					},{
+						date: '2018/03/16',
+						title: '網站伺服器維護通知',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						id: '123',
+					},{
+						date: '2018/02/20',
+						title: '舊山線網路預約及注意事項更新',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						id: '123',
+					},{
+						date: '2018/01/25',
+						title: '好友聯票方案',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						id: '123',
+					},{
+						date: '2018/03/24',
+						title: '導覽人力資料更新',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						id: '123',
+					},{
+						date: '2018/03/24',
+						title: '導覽人力資料更新',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						id: '123',
+					},{
+						date: '2018/03/24',
+						title: '導覽人力資料更新',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						id: '123',
+					},{
+						date: '2018/03/24',
+						title: '導覽人力資料更新',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						id: '123',
+					},{
+						date: '2018/03/24',
+						title: '導覽人力資料更新',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						id: '123',
+					},{
+						date: '2018/03/24',
+						title: '導覽人力資料更新',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						id: '123',
+					},{
+						date: '2018/03/24',
+						title: '導覽人力資料更新',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						id: '123',
+					},{
+						date: '2018/03/24',
+						title: '導覽人力資料更新',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						id: '123',
+					},
+				],
+				newsPerPage: 5,
+				nowPage: 1,
+      },
+      watch: {
+
+      },
+      updated: function(){
+
+      },
+      computed: {
+				pageAmount: function(){
+					return Math.max( 1, parseInt((this.news.length-1) / this.newsPerPage) + 1);
+				},
+				nowNews: function(){
+					let res = [];
+					for(let i = 0; i<this.newsPerPage; i++){
+						const ind = (this.nowPage-1) * this.newsPerPage + i;
+						if(ind >= this.news.length){
+							res.push(this.getFake());
+						}else{
+							res.push(this.news[ind]);
+						}
+
+					}
+					return res;
+				},
+				pagingArray: function(){
+					let res = [];
+					for(let i = this.nowPage - 3;i<this.nowPage+3; i++){
+						if(i>=1 && i<=this.pageAmount){
+							res.push(i);
+						}
+					}
+					return res;
+				},
+      },
+      methods: {
+				pageChange: function(p){
+					p = Math.min(p, this.pageAmount);
+					p = Math.max(p, 1);
+					this.nowPage = p;
+				},
+				toNewsContent: function(id){
+					window.location = "./newsContent"
+				},
+				getFake: function(){
+					return {
+						date: '2018/03/24',
+						title: '導覽人力資料更新',
+						id: '123',
+						snipest: '簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹簡單的介紹...',
+						fake: true,
+					};
+				},
+      }
+    });
+  }
+
+  $(document).ready(function(){
+		initApp();
+		setNavActive('nav-news');
+  });
+</script>

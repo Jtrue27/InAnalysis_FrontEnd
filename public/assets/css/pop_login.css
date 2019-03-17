@@ -1,0 +1,48 @@
+
+
+.login-panel{
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.login-title{
+  text-align: center;
+
+}
+
+.form-div{
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-label{
+  text-align: center;
+}
+
+.form-hint{
+  text-align: right;
+}
+
+@media (min-width: 768px){
+
+  .login-panel{
+    padding: 4em 6em;
+    margin: 2em auto;
+    max-width: 800px;
+    border: solid 1px #505050;
+    border-radius: 1em;
+    box-shadow: 3px 3px 4px #d6d6d6;
+  }
+
+  .login-title{
+    font-size: 3em;
+  }
+
+  .form-label{
+    position: absolute;
+    text-align: right;
+    left: 0;
+    transform: translate( -120%, 0);
+  }
+}
