@@ -12,69 +12,59 @@ var data1="123abca"
 
 iaapp.set('view engine', 'ejs');
 
-const pg_config = {
-    host: '140.112.26.237',
-    // Do not hard code your username and password.
-    // Consider using Node environment variables.
-    user: 'root',
-    password: 'lab125a',
-    database: 'DB',
-    port: 5432
-};
+// const pg_config = {
+//     host: '140.112.26.237',
+//     // Do not hard code your username and password.
+//     // Consider using Node environment variables.
+//     user: 'root',
+//     password: 'lab125a',
+//     database: 'DB',
+//     port: 5432
+// };
 
 
-function dbConnection(){
-  var data="";
-  const client = new pg.Client(pg_config);
-  client.connect(err => {
-    if (err) throw err;
-    else {
-      console.log(`Running query to PostgreSQL server: ${pg_config.host}`);
-      const query = 'SELECT * FROM "user";';
+// function dbConnection(){
+//   var data="";
+//   const client = new pg.Client(pg_config);
+//   client.connect(err => {
+//     if (err) throw err;
+//     else {
+//       console.log(`Running query to PostgreSQL server: ${pg_config.host}`);
+//       const query = 'SELECT * FROM "user";';
 
-      client.query(query)
+//       client.query(query)
 
-          .then(res => {
-              const rows = res.rows;
-              rows.map(row => {
-                  // data.user_index=row['user_index'];
-                  // data.id=row['id'];
-                  data=row['name'];  //data can not pass out a function
-                  // data.email=row['email'];
-                  // data.password=row['password'];
-                  // data.role=row['roles']
-                  console.log(`Read: ${JSON.stringify(row)}`);
-                  return data;
-
-
-
-
-              });
-
-              // process.exit();
-          })
-          .catch(err => {
-              console.log(err);
-          });
-  }
-  });
-  return data;
-}
+//           .then(res => {
+//               const rows = res.rows;
+//               rows.map(row => {
+//                   // data.user_index=row['user_index'];
+//                   // data.id=row['id'];
+//                   data=row['name'];  //data can not pass out a function
+//                   // data.email=row['email'];
+//                   // data.password=row['password'];
+//                   // data.role=row['roles']
+//                   console.log(`Read: ${JSON.stringify(row)}`);
+//                   return data;
 
 
 
 
+//               });
 
-
-
-
-// function queryDatabase() {
-
-
-
-
-//    return data;
+//               // process.exit();
+//           })
+//           .catch(err => {
+//               console.log(err);
+//           });
+//   }
+//   });
+//   return data;
 // }
+
+
+
+
+
 
 
 
@@ -92,7 +82,7 @@ function getWebAttrs(){
 function commonRoute(ejsName, req, res, optionData) {
 
   var webAttrs = getWebAttrs();
-  webAttrs.data = dbConnection();
+  // webAttrs.data = dbConnection();
 
   if (optionData) {
     webAttrs = optionData;
